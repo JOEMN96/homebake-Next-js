@@ -6,10 +6,14 @@ function Layout({ children }) {
   return (
     <main>
       <Navbar />
-      {children}
+      <div>{children}</div>
       <Footer />
 
-      <style jsx>{``}</style>
+      <style jsx>{`
+        div {
+          min-height: 98vh;
+        }
+      `}</style>
     </main>
   );
 }

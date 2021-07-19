@@ -3,14 +3,15 @@ import Link from "next/link";
 import { BsBag } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import { Avatar } from "antd";
-import styles from "../styles/Navbar.module.scss";
+import { Layout, Menu, Breadcrumb } from "antd";
+const { Header, Content, Footer } = Layout;
 
 function Navbar() {
   return (
     <header>
-      <nav className={styles.nav}>
+      <nav>
         <Link href="/">
-          <a>HomeBake</a>
+          <a className="logo">Cake Spot</a>
         </Link>
         <ul className="websiteRelated">
           <li>
@@ -20,7 +21,7 @@ function Navbar() {
             <Link href="/">Surprise Packs</Link>
           </li>
           <li>
-            <Link href="/">Blog</Link>
+            <Link href="/Blog">Blog</Link>
           </li>
           <li>
             <Link href="/d">About</Link>
@@ -29,18 +30,19 @@ function Navbar() {
 
         <ul className="userRelated">
           <li>
-            <Link href="/">
-              <BsBag />
+            <Link className="cart" href="/">
+              <a>
+                <BsBag size={26} />
+              </a>
             </Link>
           </li>
           <li>
             <Link href="/">
-              <Avatar size={42} icon={<AiOutlineUser />} />
+              <a>
+                <Avatar size={26} icon={<AiOutlineUser />} />
+              </a>
             </Link>
           </li>
-          {/* <li>
-            <Link href="/"></Link>
-          </li> */}
         </ul>
       </nav>
     </header>
