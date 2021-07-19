@@ -1,0 +1,15 @@
+.nav {
+    display: flex;
+    justify-content:space-between;
+    li {
+      list-style: none;
+    }
+    ul {
+      display: flex;
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+  }
