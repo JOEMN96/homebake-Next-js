@@ -24,7 +24,6 @@ class Navbar extends React.Component {
 
   render() {
     const { placement, visible } = this.state;
-    console.log(this.props.router);
 
     return (
       <>
