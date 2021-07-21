@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blogs",
+  "info": {
+    "name": "blog",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "author": {
+      "type": "string"
+    },
+    "html": {
+      "type": "richtext"
+    },
+    "externaLink": {
+      "type": "string"
+    },
+    "readTime": {
+      "type": "string",
+      "required": true
+    },
+    "home_page_showcase": {
+      "via": "blogs",
+      "model": "home-page-showcase"
+    }
+  }
+}

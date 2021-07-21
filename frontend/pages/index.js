@@ -12,6 +12,11 @@ export default function Home() {
 
       <Carousel />
 
+      <div className="headings">
+        <h1>Trending</h1>
+        <h6>Cakes</h6>
+      </div>
+
       <style jsx>
         {`
           main {

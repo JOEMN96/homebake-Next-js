@@ -35,6 +35,10 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "home_page_showcase": {
+      "via": "cakes",
+      "model": "home-page-showcase"
     }
   }
 }

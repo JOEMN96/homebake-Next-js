@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "home_page_showcases",
+  "info": {
+    "name": "Home Page showcase",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "blogs": {
+      "collection": "blog",
+      "via": "home_page_showcase"
+    },
+    "cakes": {
+      "collection": "cakes",
+      "via": "home_page_showcase"
+    }
+  }
+}
