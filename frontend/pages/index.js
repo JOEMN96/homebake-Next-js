@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Carousel from "../components/Home/Carousel";
+import CakeCard from "../components/Home/CakeCard";
 
 export default function Home() {
   return (
@@ -12,10 +13,12 @@ export default function Home() {
 
       <Carousel />
 
-      <div className="headings">
-        <h1>Trending</h1>
-        <h6>Cakes</h6>
-      </div>
+      {/* Trending Cakes */}
+
+      <h1 className="headings">Trending Cakes</h1>
+      <section className="trendingCakes">
+        <CakeCard price="100" title="Test name" />
+      </section>
 
       <style jsx>
         {`

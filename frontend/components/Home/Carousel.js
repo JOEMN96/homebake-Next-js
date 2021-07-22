@@ -18,7 +18,6 @@ function Carousel() {
     }
     getSliderData();
   }, []);
-  console.log(slides);
   return (
     <div className="swiperWrapper">
       <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
@@ -36,7 +35,7 @@ function Carousel() {
           : "Slides Are rendering"}
       </Swiper>
 
-      <style>
+      <style suppressHydrationWarning>
         {`
             .swiperWrapper {
                 min-height:80vh
