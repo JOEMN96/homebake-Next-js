@@ -12,13 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "blogs": {
-      "collection": "blog",
-      "via": "home_page_showcase"
-    },
     "cakes": {
-      "collection": "cakes",
-      "via": "home_page_showcase"
+      "collection": "cakes"
+    },
+    "blogs": {
+      "collection": "blog"
     }
   }
 }

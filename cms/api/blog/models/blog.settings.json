@@ -29,9 +29,18 @@
       "type": "string",
       "required": true
     },
-    "home_page_showcase": {
-      "via": "blogs",
-      "model": "home-page-showcase"
+    "showCaseImage": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

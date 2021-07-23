@@ -1,17 +1,23 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FaBolt } from "react-icons/Fa";
 
-function CakeCard({ title, price }) {
+function CakeCard({ title, price, img, index }) {
   return (
     <article>
       <div className="img">
-        <img src="/cake.jpg" alt={title + " cakeSpot"} />
+        <Image
+          width={200}
+          height={220}
+          src={`${process.env.CMSDOMAIN}${img}`}
+          alt={title}
+        />
       </div>
       <h2>{title}</h2>
 
       <p style={{ marginBottom: "12px" }}>
-        <FaBolt color="gold" /> trending no 1
+        <FaBolt color="gold" /> Trending at {index == 0 ? 1 : index + 1}
       </p>
       <div className="flex">
         <div>
@@ -20,7 +26,7 @@ function CakeCard({ title, price }) {
         </div>
         <div>
           <Link href="/">
-            <a>Add to cart</a>
+            <a className="addToCart">Add to cart</a>
           </Link>
         </div>
       </div>
@@ -36,12 +42,17 @@ function CakeCard({ title, price }) {
             color: #888888;
             margin-bottom: 3px;
           }
-          a {
+          .addToCart {
             color: black;
             font-weight: 500;
             border: 1px solid #cecece;
             padding: 8px 13px;
             border-radius: 10px;
+          }
+          .addToCart:hover {
+            border: 1px solid black;
+            color: #cecece;
+            transition: all 0.4s ease;
           }
           article {
             border: 1px solid #cecece;
