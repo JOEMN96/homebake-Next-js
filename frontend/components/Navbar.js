@@ -37,7 +37,7 @@ class Navbar extends React.Component {
         >
           <ul className={styles.websiteRelatedSideMenu}>
             <li>
-              <Link href="/">Cakes</Link>
+              <Link href="/Cakes">Cakes</Link>
             </li>
             <li>
               <Link href="/">Surprise Packs</Link>
@@ -46,7 +46,7 @@ class Navbar extends React.Component {
               <Link href="/Blog">Blog</Link>
             </li>
             <li>
-              <Link href="/d">About</Link>
+              <Link href="/">About</Link>
             </li>
           </ul>
         </Drawer>

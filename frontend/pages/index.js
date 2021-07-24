@@ -8,7 +8,6 @@ import { Row, Col } from "antd";
 export default function Home({ trending }) {
   const { blogs, cakes } = trending[0];
 
-  console.log(cakes);
   return (
     <main>
       <Head>
@@ -25,14 +24,8 @@ export default function Home({ trending }) {
       <section className="trendingCakes">
         <Row>
           {cakes.map((cake, index) => (
-            <Col xs={24} sm={12} md={6} lg={6} xl={6}>
-              <CakeCard
-                key={cake.id}
-                price={cake.price}
-                title={cake.title}
-                img={cake.images[0].url}
-                index={index}
-              />
+            <Col key={cake.id} xs={24} sm={12} md={6} lg={6} xl={6}>
+              <CakeCard cake={cake} trending={index} />
             </Col>
           ))}
         </Row>
@@ -43,9 +36,9 @@ export default function Home({ trending }) {
 
       <section className="Trendingblogs">
         <Row>
-          {blogs.map((blog, index) => (
-            <Col xs={24} sm={12} md={6} lg={6} xl={6}>
-              <BlogsCard key={index} blog={blog} />
+          {blogs.map((blog) => (
+            <Col key={blog.id} xs={24} sm={12} md={6} lg={6} xl={6}>
+              <BlogsCard blog={blog} />
             </Col>
           ))}
         </Row>

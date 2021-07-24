@@ -1,0 +1,34 @@
+.cakesPage {
+
+ h1 {
+     padding: 10px 15px;
+ }   
+}
+
+.filterDrawer {
+    position: fixed;
+    right: 0;
+    margin: 10px;
+    svg {
+        vertical-align: text-bottom;
+    }
+}
+
+.filterDataConrols {
+
+    padding: 20px;
+
+    .sortBtn {
+        width: 120px;
+        display: flex !important;
+        justify-content: center;
+        align-items: center !important;
+        span {
+            margin-right: 4px;
+        }
+        svg {
+            width: 18px !important;
+            height: 18px !important;
+        }
+    }
+}

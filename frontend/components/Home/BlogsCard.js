@@ -4,7 +4,6 @@ import Image from "next/image";
 import Moment from "react-moment";
 
 function BlogsCard({ blog }) {
-  console.log(blog);
   const { title, description, showCaseImage, created_at } = blog;
   return (
     <article>

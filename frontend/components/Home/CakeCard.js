@@ -3,22 +3,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaBolt } from "react-icons/Fa";
 
-function CakeCard({ title, price, img, index }) {
+function CakeCard({ cake, trending }) {
+  const { title, price, images, index } = cake;
+
   return (
     <article>
-      <div className="img">
-        <Image
-          width={200}
-          height={220}
-          src={`${process.env.CMSDOMAIN}${img}`}
-          alt={title}
-        />
-      </div>
+      <div className="img"></div>
       <h2>{title}</h2>
-
-      <p style={{ marginBottom: "12px" }}>
-        <FaBolt color="gold" /> Trending at {index == 0 ? 1 : index + 1}
-      </p>
+      <Image
+        width={200}
+        height={220}
+        src={`${process.env.CMSDOMAIN}${images[0].url}`}
+        alt={title}
+      />
+      {trending && (
+        <p style={{ marginBottom: "12px" }}>
+          <FaBolt color="gold" /> Trending at {trending == 0 ? 1 : trending + 1}
+        </p>
+      )}
       <div className="flex">
         <div>
           <p>Price</p>

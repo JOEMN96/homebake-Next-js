@@ -10,6 +10,8 @@ body {
   max-width:1600px;
   margin:0 auto;
 }
+$primary:"#49A159";
+
 a {
   color: inherit;
   text-decoration: none;
@@ -22,6 +24,10 @@ a {
   outline: transparent;
 }
 
+a:hover {
+  color: $primary;
+}
+
 // Nav
 
 header {
@@ -31,9 +37,6 @@ header {
   border-bottom: 1px solid #eaeaea;
   z-index: 9;
 }
-
-$primary:"#49A159";
-
 nav {
 
   .logo  {
@@ -94,6 +97,14 @@ nav {
 .headings {
   padding: 20px 10px;
 }
+
+//  Ant Design OverRides
+
+.ant-btn:hover, .ant-btn:focus {
+    color: #49A159  !important;
+    border-color: #49A159  !important;
+}
+
 //  Media Query
 
 @media  (max-width: 600px) {
