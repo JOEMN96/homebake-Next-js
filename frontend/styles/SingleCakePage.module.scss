@@ -1,0 +1,40 @@
+.cakePage {
+    margin: 15px 0;
+}
+
+.offer {
+    background-color: #49A159;
+    padding: 3px 5px;
+    border-radius: 5px;
+    color: white;
+    margin-left: 10px;
+}
+
+.col2 {
+    padding: 10px;
+    h1 {
+        margin-top: 40px;
+    }
+}
+
+.mySwiper {
+    img {
+        width: 100%;
+    }
+    :global(.swiper-wrapper){
+        margin-top: 4px !important;
+      }
+}
+
+.sizes {
+    padding-top: 10px;
+    font-size: 17px;
+    span {
+        background-color: #49A159;
+        padding: 1px 5px;
+        border-radius: 5px;
+        color: white;
+        margin:0 5px;
+        font-size: 14px;
+    }
+}

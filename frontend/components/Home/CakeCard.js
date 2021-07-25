@@ -3,24 +3,29 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaBolt } from "react-icons/Fa";
 
-function CakeCard({ cake, trending }) {
-  const { title, price, images, index } = cake;
-
+function CakeCard({ cake, trending, showtrending }) {
+  const { title, price, images, id } = cake;
+  console.log(trending);
   return (
     <article>
       <div className="img"></div>
-      <h2>{title}</h2>
       <Image
         width={200}
         height={220}
         src={`${process.env.CMSDOMAIN}${images[0].url}`}
         alt={title}
       />
-      {trending && (
+      {showtrending && (
         <p style={{ marginBottom: "12px" }}>
           <FaBolt color="gold" /> Trending at {trending == 0 ? 1 : trending + 1}
         </p>
       )}
+      <h2>
+        <Link href={"/Cake/" + id}>
+          <a> {title}</a>
+        </Link>
+      </h2>
+
       <div className="flex">
         <div>
           <p>Price</p>
@@ -37,6 +42,10 @@ function CakeCard({ cake, trending }) {
           h2 {
             padding-top: 20px;
             color: black;
+          }
+          h2:hover {
+            color: #49a159;c
+            cursor:pointer;
           }
           p {
             font-size: 17px;

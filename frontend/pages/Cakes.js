@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/Cakes.module.scss";
 import axios from "../helpers/Axios";
 import { useQuery } from "react-query";
-import { Dropdown, Button, Menu, Drawer, Row, Col } from "antd";
+import { Dropdown, Button, Menu, Drawer, Row, Col, Spin } from "antd";
 import { BiSortZA } from "react-icons/bi";
 import {
   FaSortAmountDownAlt,
@@ -77,16 +77,16 @@ function Cakes() {
 
       <h1>All Cakes</h1>
 
+      {status == "loading" && <Spin wrapperClassName="loader" size="large" />}
+
       <Row>
         {status == "error" && <h1>Something went Wrong</h1>}
 
-        {status == "loading" && <h1>loading</h1>}
-
         {status == "success" &&
-          data.map((cake, index) => {
+          data.map((cake) => {
             return (
               <Col key={cake.id} xs={24} sm={12} md={6} lg={6} xl={6}>
-                <CakeCard cake={cake} />
+                <CakeCard cake={cake} showtrending={false} />
               </Col>
             );
           })}

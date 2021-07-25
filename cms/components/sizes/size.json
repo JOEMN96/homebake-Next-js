@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_sizes_sizes",
+  "info": {
+    "name": "size",
+    "icon": "business-time",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "sizes": {
+      "type": "string"
+    }
+  }
+}

@@ -1,16 +1,47 @@
+@font-face {
+  font-family: 'Euclid Square';
+  src: url('/font/EuclidSquare-SemiBold.eot');
+  src: local('Euclid Square SemiBold'), local('EuclidSquare-SemiBold'),
+      url('/font/EuclidSquare-SemiBold.eot?#iefix') format('embedded-opentype'),
+      url('/font/EuclidSquare-SemiBold.woff2') format('woff2'),
+      url('/font/EuclidSquare-SemiBold.woff') format('woff'),
+      url('/font/EuclidSquare-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap');
+@font-face {
+  font-family: 'Euclid Square';
+  src: url('/font/EuclidSquare-Medium.eot');
+  src: local('Euclid Square Medium'), local('EuclidSquare-Medium'),
+      url('/font/EuclidSquare-Medium.eot?#iefix') format('embedded-opentype'),
+      url('/font/EuclidSquare-Medium.woff2') format('woff2'),
+      url('/font/EuclidSquare-Medium.woff') format('woff'),
+      url('/font/EuclidSquare-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'Euclid Square';
+  src: url('/font/EuclidSquare-Light.eot');
+  src: local('Euclid Square Light'), local('EuclidSquare-Light'),
+      url('/font/EuclidSquare-Light.eot?#iefix') format('embedded-opentype'),
+      url('/font/EuclidSquare-Light.woff2') format('woff2'),
+      url('/font/EuclidSquare-Light.woff') format('woff'),
+      url('/font/EuclidSquare-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
 
 html,
 body {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Euclid Square', sans-serif;
 }
 body {
   max-width:1600px;
   margin:0 auto;
 }
-$primary:"#49A159";
 
 a {
   color: inherit;
@@ -25,7 +56,7 @@ a {
 }
 
 a:hover {
-  color: $primary;
+  color: #49A159 !important;
 }
 
 // Nav
@@ -103,6 +134,16 @@ nav {
 .ant-btn:hover, .ant-btn:focus {
     color: #49A159  !important;
     border-color: #49A159  !important;
+}
+
+.ant-spin {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }  
+  
+.ant-spin i {
+  background-color: #49A159  !important;
 }
 
 //  Media Query
