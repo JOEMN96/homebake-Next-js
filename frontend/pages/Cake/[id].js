@@ -17,7 +17,6 @@ SwiperCore.use([Navigation, Thumbs]);
 function Cake({ cake }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { description, images, offer, price, title, size } = cake;
-  console.log(images);
 
   return (
     <section className={styles.cakePage}>

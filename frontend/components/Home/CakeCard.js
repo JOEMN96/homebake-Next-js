@@ -5,7 +5,6 @@ import { FaBolt } from "react-icons/Fa";
 
 function CakeCard({ cake, trending, showtrending }) {
   const { title, price, images, id } = cake;
-  console.log(trending);
   return (
     <article>
       <div className="img"></div>

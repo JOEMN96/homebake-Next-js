@@ -1,0 +1,27 @@
+.blog {
+    h1 {
+        padding: 10px;
+    }
+
+}
+
+
+.banner {
+    height: 40vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+    h1 {
+        color: white;
+    }
+}
+
+.blogHeader {
+    .desc {
+        text-align: center;
+        padding: 10px;
+        font-size: 17px;
+    }
+}

@@ -1,10 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Moment from "react-moment";
 
 function BlogsCard({ blog }) {
-  const { title, description, showCaseImage, created_at } = blog;
+  const { title, description, showCaseImage, created_at, id } = blog;
   return (
     <article>
       <div className="img">
@@ -16,11 +15,12 @@ function BlogsCard({ blog }) {
         />
       </div>
 
-      <Link href="/">
-        <a>
-          <h2>{title}</h2>
-        </a>
-      </Link>
+      <h2>
+        <Link href={`/Blog/${id}`}>
+          <a>{title}</a>
+        </Link>
+      </h2>
+
       <p>{description}</p>
       <p>
         <Moment format="D-MMMM-YYYY" date={created_at}></Moment>
