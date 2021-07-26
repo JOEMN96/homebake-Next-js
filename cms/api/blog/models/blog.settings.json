@@ -22,9 +22,6 @@
     "html": {
       "type": "richtext"
     },
-    "externaLink": {
-      "type": "string"
-    },
     "readTime": {
       "type": "string",
       "required": true

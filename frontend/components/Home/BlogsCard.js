@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Moment from "react-moment";
 
 function BlogsCard({ blog }) {
   const { title, description, showCaseImage, created_at, id } = blog;

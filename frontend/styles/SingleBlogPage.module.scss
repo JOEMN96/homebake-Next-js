@@ -1,9 +1,4 @@
-.blog {
-    h1 {
-        padding: 10px;
-    }
 
-}
 
 
 .banner {
@@ -23,5 +18,29 @@
         text-align: center;
         padding: 10px;
         font-size: 17px;
+    }
+}
+
+.details {
+    display: flex;
+    p {
+        padding:0 5px;
+        font-size: 17px;
+    }
+
+    svg {
+        color: #49A159;
+        font-size: 20px;
+        margin-left: 4px;
+    }
+
+}
+
+.render {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    img {
+        max-width: 800px;
     }
 }
