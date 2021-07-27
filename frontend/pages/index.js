@@ -4,9 +4,10 @@ import CakeCard from "../components/Home/CakeCard";
 import BlogsCard from "../components/Home/BlogsCard";
 import axios from "../helpers/Axios";
 import { Row, Col } from "antd";
+import SurprisepackCard from "../components/Home/SurprisepackCard";
 
 export default function Home({ trending }) {
-  const { blogs, cakes } = trending[0];
+  const { blogs, cakes, surprise_packs } = trending[0];
 
   return (
     <main>
@@ -39,6 +40,18 @@ export default function Home({ trending }) {
           {blogs.map((blog) => (
             <Col key={blog.id} xs={24} sm={12} md={6} lg={6} xl={6}>
               <BlogsCard blog={blog} />
+            </Col>
+          ))}
+        </Row>
+      </section>
+
+      {/* Surprise packs cards */}
+
+      <section>
+        <Row>
+          {surprise_packs.map((packs) => (
+            <Col key={packs.id} xs={24} sm={12} md={6} lg={6} xl={6}>
+              <SurprisepackCard pack={packs} />
             </Col>
           ))}
         </Row>

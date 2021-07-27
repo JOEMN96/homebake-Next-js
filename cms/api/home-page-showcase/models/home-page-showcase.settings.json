@@ -17,6 +17,9 @@
     },
     "blogs": {
       "collection": "blog"
+    },
+    "surprise_packs": {
+      "collection": "surprise-pack"
     }
   }
 }

@@ -1,12 +1,10 @@
 import axios from "../../helpers/Axios";
 import Head from "next/head";
-import { Row, Col } from "antd";
 import styles from "../../styles/SingleBlogPage.module.scss";
 import Moment from "react-moment";
 import { MdDateRange } from "react-icons/md";
 import { AiOutlineRead, AiOutlineUser } from "react-icons/ai";
 import marked from "marked";
-import { useRef, useEffect } from "react";
 marked.use({
   baseUrl: `${process.env.CMSDOMAIN}`,
 });
@@ -19,8 +17,6 @@ marked.Renderer.prototype.paragraph = (text) => {
 };
 
 function Blog({ blog }) {
-  const htmlDiv = useRef();
-
   const {
     title,
     author,
@@ -32,12 +28,6 @@ function Blog({ blog }) {
   } = blog;
 
   const html_render = marked(html);
-  console.log(html_render);
-  useEffect(function () {
-    setTimeout(() => {
-      htmlDiv.current.innerHTML = html_render;
-    }, 2000);
-  }, []);
 
   return (
     <section className={styles.blog}>
@@ -72,7 +62,7 @@ function Blog({ blog }) {
           </div>
         </div>
         <div className={styles.render}>
-          <div ref={htmlDiv}></div>
+          <div dangerouslySetInnerHTML={{ __html: html_render }}></div>
         </div>
       </div>
     </section>

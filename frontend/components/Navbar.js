@@ -40,7 +40,7 @@ class Navbar extends React.Component {
               <Link href="/Cakes">Cakes</Link>
             </li>
             <li>
-              <Link href="/">Surprise Packs</Link>
+              <Link href="/SurprisePacks">Surprise Packs</Link>
             </li>
             <li>
               <Link href="/Blogs">Blogs</Link>
@@ -65,10 +65,12 @@ class Navbar extends React.Component {
               </li>
               <li
                 className={
-                  this.props.router.pathname == "/Packs" ? "navActive" : ""
+                  this.props.router.pathname == "/SurprisePacks"
+                    ? "navActive"
+                    : ""
                 }
               >
-                <Link href="/Packs">Surprise Packs</Link>
+                <Link href="/SurprisePacks">Surprise Packs</Link>
               </li>
               <li
                 className={
