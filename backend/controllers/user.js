@@ -25,6 +25,15 @@ const signIn = async (req, res) => {
     if (!user) {
       return res.status(401).send({ err: "Unable to find User " });
     }
+    const token = user.generateJWT();
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      sameSite: true,
+      signed: true,
+      secure: false,
+    });
+    // ! Change to true on production
+
     res.status(200).send(user);
   } catch (error) {
     console.log(error.stack);

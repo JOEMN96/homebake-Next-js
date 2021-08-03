@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import isEmail from "validator/lib/isEmail";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const USER = new Schema(
   {
@@ -37,9 +38,7 @@ const USER = new Schema(
       },
     ],
 
-    tokens: {
-      type: [{ type: String }],
-    },
+    tokens: [{ type: String }],
     emailVerified: { type: Boolean, default: false },
     phoneNumber: { type: Number },
   },
@@ -65,6 +64,15 @@ USER.statics.Authenticate = async function (email, password) {
     throw new Error("Password or Email is not correct");
   }
   return _user;
+};
+
+USER.methods.generateJWT = async function () {
+  const token = jwt.sign({ _id: this._id }, "SECRETHERE", {
+    expiresIn: "1 day",
+  });
+  this.tokens.push(token);
+  await this.save();
+  return token;
 };
 
 const user = mongoose.model("User", USER);

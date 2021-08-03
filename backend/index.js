@@ -1,6 +1,9 @@
 import express from "express";
 import userRouter from "./routes/user";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+import passport from "passport";
+import jwt from "jsonwebtoken";
 
 const app = express();
 mongoose.connect(
@@ -20,12 +23,25 @@ mongoose.connect(
 );
 
 app.use(express.json());
+app.use(cookieParser("SUPERSECRET"));
+app.use(passport.initialize());
 
+// ! Add .env Above
 app.get("/", (req, res) => {
   res.status(200).send("Webserver is Working");
 });
 
 app.use(userRouter);
+
+app.get(
+  "/test",
+  passport.authenticate("jwt-cookiecombo", {
+    session: false,
+  }),
+  (req, res) => {
+    res.send("hey");
+  }
+);
 
 app.use((req, res) => {
   res.status(404).send();
