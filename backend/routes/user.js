@@ -1,11 +1,14 @@
 import { Router } from "express";
 import { signUp, signIn } from "../controllers/user";
+import {
+  validateSignUp,
+  validateSignIn,
+  isValid,
+} from "../middlewares/validators";
 
 const router = Router();
 
-router.post("/signUp", signUp);
-router.post("/signIn", signIn);
+router.post("/signUp", validateSignIn, isValid, signUp);
+router.post("/signIn", validateSignUp, isValid, signIn);
 
 export default router;
-
-// ! Work on pwd Length !!!!!!!!!!!!!!!!!!
