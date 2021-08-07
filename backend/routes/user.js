@@ -5,10 +5,11 @@ import {
   validateSignIn,
   isValid,
 } from "../middlewares/validators";
+import { auth } from "../middlewares/auth";
 
 const router = Router();
 
 router.post("/signUp", validateSignIn, isValid, signUp);
-router.post("/signIn", validateSignUp, isValid, signIn);
+router.post("/signIn", auth, validateSignUp, isValid, signIn);
 
 export default router;

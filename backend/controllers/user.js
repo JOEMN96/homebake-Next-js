@@ -1,4 +1,3 @@
-import isEmail from "validator/lib/isEmail";
 import USER from "../models/user";
 
 const signUp = async (req, res) => {
@@ -12,6 +11,13 @@ const signUp = async (req, res) => {
   try {
     const _user = new USER({ password, email, name });
     await _user.save();
+    const token = await _user.generateJWT();
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      sameSite: true,
+      // signed: true,
+      secure: false,
+    });
     return res.status(201).send(_user);
   } catch (error) {
     return res.status(400).send({ err: error.message });
@@ -25,11 +31,12 @@ const signIn = async (req, res) => {
     if (!user) {
       return res.status(401).send({ err: "Unable to find User " });
     }
-    const token = user.generateJWT();
+    const token = await user.generateJWT();
+
     res.cookie("jwt", token, {
       httpOnly: true,
       sameSite: true,
-      signed: true,
+      // signed: true,
       secure: false,
     });
     // ! Change to true on production
