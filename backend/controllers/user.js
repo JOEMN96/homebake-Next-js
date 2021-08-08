@@ -15,7 +15,7 @@ const signUp = async (req, res) => {
     res.cookie("jwt", token, {
       httpOnly: true,
       sameSite: true,
-      // signed: true,
+      signed: true,
       secure: false,
     });
     return res.status(201).send(_user);
@@ -36,7 +36,7 @@ const signIn = async (req, res) => {
     res.cookie("jwt", token, {
       httpOnly: true,
       sameSite: true,
-      // signed: true,
+      signed: true,
       secure: false,
     });
     // ! Change to true on production
@@ -48,4 +48,18 @@ const signIn = async (req, res) => {
   }
 };
 
-export { signUp, signIn };
+const userProfile = async (req, res) => {
+  res.status(200).send(req.user);
+};
+
+const logout = async (req, res) => {
+  const token = req.signedCookies.jwt;
+  req.user.tokens = req.user.tokens.filter((item) => {
+    return item !== token;
+  });
+  await req.user.save();
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.status(307).redirect("/");
+};
+
+export { signUp, signIn, userProfile, logout };

@@ -21,7 +21,7 @@ mongoose.connect(
 );
 
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser("ASECRETSTRING"));
 
 // ! Add .env Above
 app.get("/", (req, res) => {

@@ -37,7 +37,9 @@ const USER = new Schema(
         id: Number,
       },
     ],
-
+    avatar: {
+      type: String,
+    },
     tokens: [{ type: String }],
     emailVerified: { type: Boolean, default: false },
     phoneNumber: { type: Number },
@@ -73,6 +75,14 @@ USER.methods.generateJWT = async function () {
   this.tokens.push(token);
   await this.save();
   return token;
+};
+
+USER.methods.toJSON = function () {
+  var obj = this.toObject();
+  delete obj.password;
+  delete obj.phoneNumber;
+  delete obj.tokens;
+  return obj;
 };
 
 const user = mongoose.model("User", USER);
