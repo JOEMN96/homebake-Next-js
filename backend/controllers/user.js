@@ -1,4 +1,3 @@
-import isEmail from "validator/lib/isEmail";
 import USER from "../models/user";
 
 const signUp = async (req, res) => {
@@ -12,6 +11,13 @@ const signUp = async (req, res) => {
   try {
     const _user = new USER({ password, email, name });
     await _user.save();
+    const token = await _user.generateJWT();
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      sameSite: true,
+      signed: true,
+      secure: false,
+    });
     return res.status(201).send(_user);
   } catch (error) {
     return res.status(400).send({ err: error.message });
@@ -25,6 +31,15 @@ const signIn = async (req, res) => {
     if (!user) {
       return res.status(401).send({ err: "Unable to find User " });
     }
+    const token = await user.generateJWT();
+
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      sameSite: true,
+      signed: true,
+      secure: false,
+    });
+
     res.status(200).send(user);
   } catch (error) {
     console.log(error.stack);
@@ -32,4 +47,18 @@ const signIn = async (req, res) => {
   }
 };
 
-export { signUp, signIn };
+const userProfile = async (req, res) => {
+  res.status(200).send(req.user);
+};
+
+const logout = async (req, res) => {
+  const token = req.signedCookies.jwt;
+  req.user.tokens = req.user.tokens.filter((item) => {
+    return item !== token;
+  });
+  await req.user.save();
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.status(307).redirect("/");
+};
+
+export { signUp, signIn, userProfile, logout };

@@ -1,6 +1,7 @@
 import express from "express";
 import userRouter from "./routes/user";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 const app = express();
 mongoose.connect(
@@ -20,7 +21,9 @@ mongoose.connect(
 );
 
 app.use(express.json());
+app.use(cookieParser("ASECRETSTRING"));
 
+// ! Add .env Above
 app.get("/", (req, res) => {
   res.status(200).send("Webserver is Working");
 });
