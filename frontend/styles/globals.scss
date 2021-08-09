@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap');
+
+
 @font-face {
   font-family: 'Euclid Square';
   src: url('/font/EuclidSquare-SemiBold.eot');
@@ -146,6 +149,12 @@ nav {
   background-color: #49A159  !important;
 }
 
+.fallback {
+  height: 90vh;
+  display: grid;
+  place-items: center;
+}
+
 //  Media Query
 
 @media  (max-width: 600px) {
@@ -154,5 +163,14 @@ nav {
   }
   .websiteRelated {
     display: none;
+  }
+}
+
+@media  (max-width: 1050px) {
+  .blogCard {
+    flex-wrap: wrap;
+  }
+  .cakesPageHeader {
+    background-size: 100% !important;
   }
 }

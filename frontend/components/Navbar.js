@@ -46,7 +46,7 @@ class Navbar extends React.Component {
               <Link href="/Blogs">Blogs</Link>
             </li>
             <li>
-              <Link href="/">About</Link>
+              <Link href="/About">About</Link>
             </li>
           </ul>
         </Drawer>
@@ -90,14 +90,14 @@ class Navbar extends React.Component {
 
             <ul className="userRelated">
               <li>
-                <Link className="cart" href="/">
+                <Link className="cart" href="/Cart">
                   <a>
                     <BsBag size={26} />
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/Profile">
                   <a>
                     <Avatar size={26} icon={<AiOutlineUser />} />
                   </a>

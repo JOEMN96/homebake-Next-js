@@ -55,6 +55,8 @@ function Cakes() {
   );
   return (
     <section className={styles.cakesPage}>
+      <section className="cakesPageHeader"></section>
+
       <Button className={styles.filterDrawer} onClick={showDrawer}>
         <FaFilter color="#49A159" />
       </Button>
@@ -91,6 +93,19 @@ function Cakes() {
             );
           })}
       </Row>
+      <style jsx>
+        {`
+          .cakesPageHeader {
+            background: url(/images/cakePageHeader.svg) no-repeat center center;
+            background-position: center center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+          }
+          .cakesPageHeader {
+            height: 40vh;
+          }
+        `}
+      </style>
     </section>
   );
 }

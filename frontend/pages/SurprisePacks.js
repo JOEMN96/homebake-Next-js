@@ -5,6 +5,8 @@ import { Row, Col } from "antd";
 function SurprisePacks({ packs }) {
   return (
     <div>
+      <section className="packsHeader"></section>
+
       <h1>packs</h1>
       <Row>
         {packs.length > 0 &&
@@ -17,6 +19,19 @@ function SurprisePacks({ packs }) {
           })}
         {packs.length == 0 && <h1> No Surprise Packs to show </h1>}
       </Row>
+      <style jsx>
+        {`
+          .packsHeader {
+            background: url(/images/surpriseHeader.svg) no-repeat center center;
+            background-position: center center;
+            background-size: 50%;
+            background-repeat: no-repeat;
+          }
+          .packsHeader {
+            height: 40vh;
+          }
+        `}
+      </style>
     </div>
   );
 }

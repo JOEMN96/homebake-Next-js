@@ -1,57 +1,98 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Moment from "react-moment";
+import { FcCalendar } from "react-icons/fc";
+import { AiOutlineUser } from "react-icons/ai";
+import { AiFillRead } from "react-icons/ai";
 
 function BlogsCard({ blog }) {
-  const { title, description, showCaseImage, created_at, id } = blog;
+  console.log(blog);
+  const { title, description, showCaseImage, created_at, id, author } = blog;
   return (
-    <article>
+    <article className="blogCard">
       <div className="img">
-        <Image
+        {/* <Image
           width={200}
           height={220}
           src={`${process.env.CMSDOMAIN}${showCaseImage.url}`}
           alt={title}
-        />
+        /> */}
+        <img src={`${process.env.CMSDOMAIN}${showCaseImage.url}`} alt={title} />
       </div>
 
-      <h2>
-        <Link href={`/Blog/${id}`}>
-          <a>{title}</a>
-        </Link>
-      </h2>
+      <div className="contents">
+        <h2>
+          <Link href={`/Blog/${id}`}>
+            <a>{title}</a>
+          </Link>
+        </h2>
 
-      <p>{description}</p>
-      <p>
-        <Moment format="D-MMMM-YYYY" date={created_at}></Moment>
-      </p>
+        <p>{description}</p>
+        <div className="icons">
+          <FcCalendar />
+          <Moment format="MMMM Do YYYY" date={created_at}></Moment>
+          <AiOutlineUser />
+          <p style={{ display: "inline-block", marginBottom: 0 }}>{author}</p>
+        </div>
+        <button>
+          <AiFillRead size={17} /> Read More
+        </button>
+      </div>
 
       <style jsx>
         {`
-          h2 {
-            padding-top: 20px;
-            color: black;
-          }
-          p {
-            font-size: 14px;
-            font-weight: 400;
-            color: #888888;
-            margin-bottom: 3px;
-          }
-
           article {
-            border: 1px solid #cecece;
-            border-radius: 20px;
-            max-width: 250px;
-            margin: 20px;
-            padding: 10px;
-          }
-          img {
-            max-width: 200px;
+            display: flex;
+            margin: 10px;
+            border: 2px solid #f2f2f2;
+            border-radius: 8px;
           }
           .img {
-            text-align: center;
+            width: 100%;
+          }
+          .img img {
+            width: 100%;
+            height: 100%;
+          }
+          .contents {
+            padding: 5px 10px;
+          }
+          h2 {
+            font-family: "Roboto Slab", serif;
+            font-weight: medium;
+          }
+          .icons {
+            display: flex;
+            align-items: center;
+          }
+          .icons > svg {
+            margin: 5px;
+          }
+          .icons > svg:n-th-child(2) {
+            margin-left: 10px;
+          }
+          time {
+            padding: 7px;
+          }
+          p {
+            text-align: justify;
+          }
+          button {
+            display: flex;
+            align-items: center;
+            padding: 4px 8px 4px 12px;
+            margin: 8px auto;
+            border-radius: 4px;
+            border: 2px solid currentColor;
+            color: black;
+            background: none;
+            cursor: pointer;
+            font-weight: bold;
+          }
+          button:hover {
+            color: #49a159;
+            border-color: #49a159;
+            transition: all 0.5 ease;
           }
         `}
       </style>

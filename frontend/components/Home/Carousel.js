@@ -21,18 +21,27 @@ function Carousel() {
   return (
     <div className="swiperWrapper">
       <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
-        {slides.length > 1
-          ? slides.map((slide, index) => (
-              <SwiperSlide key={index}>
-                {/* <img src={`${process.env.CMSDOMAIN}${slide.Image.url}`} alt="" /> */}
-                <Image
-                  layout="fill"
-                  src={`${process.env.CMSDOMAIN}${slide.Image.url}`}
-                  alt="Picture of the author"
-                />
-              </SwiperSlide>
-            ))
-          : "Slides Are rendering"}
+        {slides.length > 1 ? (
+          slides.map((slide, index) => (
+            <SwiperSlide key={index}>
+              {/* <img src={`${process.env.CMSDOMAIN}${slide.Image.url}`} alt="" /> */}
+              <Image
+                layout="fill"
+                src={`${process.env.CMSDOMAIN}${slide.Image.url}`}
+                alt="Picture of the author"
+              />
+            </SwiperSlide>
+          ))
+        ) : (
+          <SwiperSlide>
+            {" "}
+            <Image
+              layout="fill"
+              src="/images/Chocolate+Mirror+Cake+1200.jpg"
+              alt="Picture of the author"
+            />{" "}
+          </SwiperSlide>
+        )}
       </Swiper>
 
       <style suppressHydrationWarning>
