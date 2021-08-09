@@ -39,7 +39,6 @@ const signIn = async (req, res) => {
       signed: true,
       secure: false,
     });
-    // ! Change to true on production
 
     res.status(200).send(user);
   } catch (error) {
