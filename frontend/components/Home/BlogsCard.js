@@ -35,7 +35,10 @@ function BlogsCard({ blog }) {
           <p style={{ display: "inline-block", marginBottom: 0 }}>{author}</p>
         </div>
         <button>
-          <AiFillRead size={17} /> Read More
+          <AiFillRead size={17} />
+          <Link href={`/Blog/${id}`}>
+            <a>Read More </a>
+          </Link>
         </button>
       </div>
 
@@ -43,7 +46,7 @@ function BlogsCard({ blog }) {
         {`
           article {
             display: flex;
-            margin: 10px;
+            margin: 20px;
             border: 2px solid #f2f2f2;
             border-radius: 8px;
           }
@@ -66,11 +69,9 @@ function BlogsCard({ blog }) {
             align-items: center;
           }
           .icons > svg {
-            margin: 5px;
-          }
-          .icons > svg:n-th-child(2) {
             margin-left: 10px;
           }
+
           time {
             padding: 7px;
           }

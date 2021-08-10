@@ -1,43 +1,68 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { FaBolt } from "react-icons/Fa";
+import { RiShoppingCartLine } from "react-icons/ri";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
-function CakeCard({ cake, trending, showtrending }) {
+function CakeCard({ cake }) {
   const { title, price, images, id } = cake;
   return (
     <article>
-      <div className="img"></div>
-      <Image
-        width={200}
-        height={220}
-        src={`${process.env.CMSDOMAIN}${images[0].url}`}
-        alt={title}
-      />
-      {showtrending && (
-        <p style={{ marginBottom: "12px" }}>
-          <FaBolt color="gold" /> Trending at {trending == 0 ? 1 : trending + 1}
-        </p>
-      )}
-      <h2>
-        <Link href={"/Cake/" + id}>
-          <a> {title}</a>
-        </Link>
-      </h2>
+      <div
+        style={{
+          backgroundImage: `url(${process.env.CMSDOMAIN}${images[0].url})`,
+        }}
+        className="img"
+      ></div>
 
-      <div className="flex">
-        <div>
-          <p>Price</p>
-          <p>₹ {price}</p>
+      <div className="content">
+        <div className="flex2">
+          <h2>
+            <Link href={"/Cake/" + id}>
+              <a> {title}</a>
+            </Link>
+          </h2>
+          <button className="viewBtn">
+            <Link href={"/Cake/" + id}>
+              <AiOutlineArrowRight
+                style={{
+                  verticalAlign: "sub",
+                  marginTop: "1px",
+                  fontSize: "18px",
+                  marginLeft: "2px",
+                }}
+              />
+            </Link>
+          </button>
         </div>
-        <div>
-          <Link href="/">
-            <a className="addToCart">Add to cart</a>
-          </Link>
+
+        <div className="flex">
+          <div>
+            <p>₹ {price}</p>
+          </div>
+          <div>
+            <Link href="/">
+              <a className="addToCart">
+                <RiShoppingCartLine className="arrow" />
+              </a>
+            </Link>
+          </div>
         </div>
       </div>
+
       <style jsx>
         {`
+          .img {
+            height: 250px;
+            width: 100%;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            border-radius: 10px 10px 0 0;
+          }
+
+          .content {
+            padding:10px;
+          }
+
           h2 {
             padding-top: 20px;
             color: black;
@@ -49,41 +74,60 @@ function CakeCard({ cake, trending, showtrending }) {
           p {
             font-size: 17px;
             font-weight: 500;
-            color: #888888;
+            color: #254053;
             margin-bottom: 3px;
           }
           .addToCart {
-            color: black;
-            font-weight: 500;
-            border: 1px solid #cecece;
+            color: #254053;
             padding: 8px 13px;
             border-radius: 10px;
+            font-size:26px;
           }
           .addToCart:hover {
-            border: 1px solid black;
             color: #cecece;
-            transition: all 0.4s ease;
+            transition: all 0.2s ease-in;
+            font-size:30px;
           }
           article {
-            border: 1px solid #cecece;
-            border-radius: 20px;
-            max-width: 250px;
+            border-radius: 10px;
+            max-width: 280px;
             margin: 20px;
-            padding: 10px;
+            box-shadow: 5px 20px 30px rgba(0,0,0,0.2)
           }
-          img {
-            max-width: 200px;
-          }
-          .img {
-            text-align: center;
-          }
+       
           .flex {
             display: flex;
             justify-content: space-between;
+            align-items:center;
+            height:40px;
           }
-          svg {
-            color: gold;
+          .flex2 {
+            display: flex;
+            justify-content: space-between;
+            align-items:center;
           }
+          .viewBtn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #cecece;
+            cursor:pointer;
+          }
+
+          .arrow  {
+            vertical-align: sub;
+            margin-top: 4px;
+            font-size: 18px;
+            margin-left: 2px;
+          }
+
+          .viewBtn:hover {
+            color: #49A159;
+            border-color: #49A159;
+            transition: all 0.2s ease-in;
+          }
+
+        
         `}
       </style>
     </article>

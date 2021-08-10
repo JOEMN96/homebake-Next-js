@@ -26,7 +26,7 @@ export default function Home({ trending }) {
           <Row>
             {cakes.map((cake, index) => (
               <Col key={cake.id} xs={24} sm={12} md={6} lg={6} xl={6}>
-                <CakeCard cake={cake} trending={index} showtrending={true} />
+                <CakeCard cake={cake} />
               </Col>
             ))}
           </Row>
