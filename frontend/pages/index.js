@@ -20,8 +20,10 @@ export default function Home({ trending }) {
         <Carousel />
 
         {/* Trending Cakes */}
-
-        <h1 className="headings">Trending Cakes</h1>
+        <div className="titleWrapper">
+          <h1 className="headings">Trending</h1>
+          <h2>Cakes</h2>
+        </div>
         <section className="trendingCakes">
           <Row>
             {cakes.map((cake, index) => (
@@ -33,7 +35,10 @@ export default function Home({ trending }) {
         </section>
 
         {/* Trending Blogs */}
-        <h1 className="headings">Trending Blogs</h1>
+        <div className="titleWrapper">
+          <h1 className="headings">Read About </h1>
+          <h2>Blogs</h2>
+        </div>
 
         <section className="Trendingblogs">
           <Row>
@@ -46,6 +51,11 @@ export default function Home({ trending }) {
         </section>
 
         {/* Surprise packs cards */}
+
+        <div className="titleWrapper">
+          <h1 className="headings">Happiness</h1>
+          <h2>Surprise Packs</h2>
+        </div>
 
         <section>
           <Row>

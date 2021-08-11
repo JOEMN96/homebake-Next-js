@@ -1,23 +1,38 @@
 import SurprisepackCard from "../components/Home/SurprisepackCard";
 import axios from "../helpers/Axios";
-import { Row, Col } from "antd";
+import { useQuery } from "react-query";
+import { Row, Col, Spin } from "antd";
 
-function SurprisePacks({ packs }) {
+const fetchPacks = async () => {
+  const res = await axios.get("surprise-packs");
+  const data = await res.data;
+  return data;
+};
+
+function SurprisePacks() {
+  const { data, status } = useQuery("packs", fetchPacks);
   return (
     <div>
       <section className="packsHeader"></section>
-
-      <h1>packs</h1>
+      <div className="titleWrapper">
+        <h1 className="headings">Surprise</h1>
+        <h2>Packs</h2>
+      </div>
+      {status == "loading" && <Spin wrapperClassName="loader" size="large" />}
+      {status == "error" && (
+        <h1 style={{ textAlign: "center" }}>
+          Currently there is No Product available Available
+        </h1>
+      )}
       <Row>
-        {packs.length > 0 &&
-          packs.map((pack) => {
+        {status == "success" &&
+          data.map((pack) => {
             return (
-              <Col key={pack.id} xs={24} sm={12} md={6} lg={6} xl={6}>
+              <Col key={pack.id} xs={24} sm={12} md={6} lg={8} xl={8}>
                 <SurprisepackCard pack={pack} />
               </Col>
             );
           })}
-        {packs.length == 0 && <h1> No Surprise Packs to show </h1>}
       </Row>
       <style jsx>
         {`
@@ -35,13 +50,5 @@ function SurprisePacks({ packs }) {
     </div>
   );
 }
-
-export const getServerSideProps = async () => {
-  const res = await axios.get("/surprise-packs");
-  const packs = await res.data;
-  return {
-    props: { packs },
-  };
-};
 
 export default SurprisePacks;

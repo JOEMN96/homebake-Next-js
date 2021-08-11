@@ -7,19 +7,19 @@ import "swiper/components/thumbs/thumbs.min.css";
 import styles from "../../styles/SingleCakePage.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Head from "next/head";
-import Image from "next/image";
-
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
+import Image from "next/Image";
 
-// install Swiper modules
 SwiperCore.use([Navigation, Thumbs]);
 
-function Cake({ cake }) {
+function Packs({ cake }) {
+  const { title, price, description, images } = cake;
+
+  console.log(cake);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const { description, images, offer, price, title, size } = cake;
 
   return (
-    <section className={styles.cakePage}>
+    <section>
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -77,7 +77,8 @@ function Cake({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide>
-                  <img
+                  <Image
+                    layout="fill"
                     src={`${process.env.CMSDOMAIN}${image.url}`}
                     alt={title}
                   />
@@ -88,32 +89,23 @@ function Cake({ cake }) {
         </Col>
         <Col className={styles.col2} xs={24} sm={24} md={8} lg={12} xl={12}>
           <h1>{title}</h1>
-          <h3>
-            ₹ {price}{" "}
-            {offer && <span className={styles.offer}>{"-" + offer}</span>}
-          </h3>
-          <div className={styles.sizes}>
-            <p>
-              Available sizes:
-              {size.length > 0 &&
-                size.map((size) => <span> {size.sizes}</span>)}
-            </p>
-          </div>
+          <h3>₹ {price}</h3>
+
           <p>{description}</p>
           <button>Buy Now</button>
         </Col>
       </Row>
-      <style jsx>{``}</style>
     </section>
   );
 }
 
-Cake.getInitialProps = async (ctx) => {
-  const res = await axios.get(`cakes/${ctx.query.id}`);
+export default Packs;
+
+Packs.getInitialProps = async (ctx) => {
+  console.log(ctx);
+  const res = await axios.get(`surprise-packs/${ctx.query.id}`);
   const cake = res.data;
   return {
     cake,
   };
 };
-
-export default Cake;

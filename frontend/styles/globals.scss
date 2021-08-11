@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
 
 
 @font-face {
@@ -130,7 +131,35 @@ nav {
 }
 .headings {
   padding: 20px 10px;
+  margin-bottom: 0;
 }
+
+.titleWrapper {
+  position: relative;
+   h1 {
+  font-size: 110px;
+  text-align: center;
+  color: #c7c5d1;
+  letter-spacing: 0px;
+  font-family: "Bubblegum Sans", cursive;
+  } 
+
+  h2 {
+    font-weight: bold;
+    font-size: 28px;
+    line-height: normal;
+    letter-spacing: 5px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 50%;
+  }
+
+}
+
+
+
+
 
 //  Ant Design OverRides
 
@@ -178,3 +207,22 @@ nav {
   }
 }
 
+@media  (max-width: 450px) {
+  .titleWrapper {
+     h1 {
+    font-size: 60px;
+    } 
+  
+    h2 {
+      font-weight: bold;
+      font-size: 20px;
+      line-height: normal;
+      letter-spacing: 5px;
+      position: absolute;
+      left: 55%;
+      margin-left: -50px;
+      top: 42%;
+    }
+  
+  }
+}

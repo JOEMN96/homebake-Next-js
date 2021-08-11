@@ -77,10 +77,17 @@ function Cakes() {
         </div>
       </Drawer>
 
-      <h1>All Cakes</h1>
+      <div className="titleWrapper">
+        <h1 className="headings">Showcase</h1>
+        <h2>Cakes</h2>
+      </div>
 
       {status == "loading" && <Spin wrapperClassName="loader" size="large" />}
-
+      {status == "error" && (
+        <h1 style={{ textAlign: "center" }}>
+          Currently there is No Product available Available
+        </h1>
+      )}
       <Row>
         {status == "error" && <h1>Something went Wrong</h1>}
 

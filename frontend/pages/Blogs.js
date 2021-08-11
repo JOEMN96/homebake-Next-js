@@ -12,13 +12,20 @@ const fetchBlogs = async () => {
 
 function Blog() {
   const { data, status } = useQuery("blogs", fetchBlogs);
-  console.log(data);
 
   return (
     <div>
       <section className="blogPageHeader"></section>
-      <h1>Blogs</h1>
+      <div className="titleWrapper">
+        <h1 className="headings">News</h1>
+        <h2>Blogs</h2>
+      </div>
       {status == "loading" && <Spin wrapperClassName="loader" size="large" />}
+      {status == "error" && (
+        <h1 style={{ textAlign: "center" }}>
+          Currently there is No Product available Available
+        </h1>
+      )}
       <Row>
         {status == "success" &&
           data.map((blog) => {
