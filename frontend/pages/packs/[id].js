@@ -51,7 +51,7 @@ function Packs({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide>
-                  <Image layout="fill" src={`${image.url}`} alt={title} />
+                  <img src={`${image.url}`} alt={title} />
                 </SwiperSlide>
               );
             })}
@@ -73,7 +73,7 @@ function Packs({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide>
-                  <Image layout="fill" src={`${image.url}`} alt={title} />
+                  <img src={`${image.url}`} alt={title} />
                 </SwiperSlide>
               );
             })}
