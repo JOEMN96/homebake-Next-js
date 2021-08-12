@@ -3,7 +3,7 @@ module.exports = {
     CMSDOMAIN: "http://localhost:1337",
   },
   images: {
-    domains: ["localhost"],
+    domains: ["localhost", "res.cloudinary.com"],
   },
 };
 

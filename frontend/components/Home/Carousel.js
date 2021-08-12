@@ -24,10 +24,9 @@ function Carousel() {
         {slides.length > 1 ? (
           slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              {/* <img src={`${process.env.CMSDOMAIN}${slide.Image.url}`} alt="" /> */}
               <Image
                 layout="fill"
-                src={`${process.env.CMSDOMAIN}${slide.Image.url}`}
+                src={`${slide.Image.url}`}
                 alt="Picture of the author"
               />
             </SwiperSlide>

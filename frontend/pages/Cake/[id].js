@@ -51,11 +51,7 @@ function Cake({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide>
-                  <Image
-                    layout="fill"
-                    src={`${process.env.CMSDOMAIN}${image.url}`}
-                    alt={title}
-                  />
+                  <Image layout="fill" src={`${image.url}`} alt={title} />
                 </SwiperSlide>
               );
             })}
@@ -77,10 +73,7 @@ function Cake({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide>
-                  <img
-                    src={`${process.env.CMSDOMAIN}${image.url}`}
-                    alt={title}
-                  />
+                  <img src={`${image.url}`} alt={title} />
                 </SwiperSlide>
               );
             })}

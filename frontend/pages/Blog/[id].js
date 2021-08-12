@@ -6,7 +6,7 @@ import { MdDateRange } from "react-icons/md";
 import { AiOutlineRead, AiOutlineUser } from "react-icons/ai";
 import marked from "marked";
 marked.use({
-  baseUrl: `${process.env.CMSDOMAIN}`,
+  baseUrl: `https://cakespotcms.herokuapp.com/`,
 });
 
 marked.Renderer.prototype.paragraph = (text) => {
@@ -42,7 +42,7 @@ function Blog({ blog }) {
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
         <div
           style={{
-            backgroundImage: `url(${process.env.CMSDOMAIN}${showCaseImage.url})`,
+            backgroundImage: `url(${showCaseImage.url})`,
           }}
           className={styles.banner}
         >

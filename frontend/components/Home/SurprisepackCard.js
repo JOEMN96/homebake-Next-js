@@ -9,7 +9,7 @@ function SurprisepackCard({ pack }) {
     <article>
       <div
         style={{
-          backgroundImage: `url(${process.env.CMSDOMAIN}${images[0].url})`,
+          backgroundImage: `url(${images[0].url})`,
         }}
         className="img"
       ></div>

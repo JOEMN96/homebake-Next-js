@@ -11,13 +11,7 @@ function BlogsCard({ blog }) {
   return (
     <article className="blogCard">
       <div className="img">
-        {/* <Image
-          width={200}
-          height={220}
-          src={`${process.env.CMSDOMAIN}${showCaseImage.url}`}
-          alt={title}
-        /> */}
-        <img src={`${process.env.CMSDOMAIN}${showCaseImage.url}`} alt={title} />
+        <img src={`${showCaseImage.url}`} alt={title} />
       </div>
 
       <div className="contents">
