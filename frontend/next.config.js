@@ -1,7 +1,5 @@
 module.exports = {
-  env: {
-    CMSDOMAIN: "http://localhost:1337",
-  },
+  distDir: "build",
   images: {
     domains: ["res.cloudinary.com"],
   },
