@@ -6,7 +6,6 @@ import { AiOutlineUser } from "react-icons/ai";
 import { AiFillRead } from "react-icons/ai";
 
 function BlogsCard({ blog }) {
-  console.log(blog);
   const { title, description, showCaseImage, created_at, id, author } = blog;
   return (
     <article className="blogCard">
