@@ -21,7 +21,7 @@ function Carousel() {
   return (
     <div className="swiperWrapper">
       <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
-        {slides.length > 1 ? (
+        {slides.length > 0 ? (
           slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <Image
@@ -33,10 +33,9 @@ function Carousel() {
           ))
         ) : (
           <SwiperSlide>
-            {" "}
             <Image
               layout="fill"
-              src="/images/Chocolate+Mirror+Cake+1200.jpg"
+              src="/images/bkupSlide.jpg"
               alt="Picture of the author"
             />{" "}
           </SwiperSlide>
