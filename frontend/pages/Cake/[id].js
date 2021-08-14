@@ -7,7 +7,7 @@ import "swiper/components/thumbs/thumbs.min.css";
 import styles from "../../styles/SingleCakePage.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Head from "next/head";
-import Image from "next/image";
+// import Image from "next/image";
 
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
 
@@ -51,7 +51,8 @@ function Cake({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide>
-                  <Image layout="fill" src={`${image.url}`} alt={title} />
+                  {/* <Image layout="fill" src={`${image.url}`} alt={title} /> */}
+                  <img src={`${image.url}`} alt="" />
                 </SwiperSlide>
               );
             })}

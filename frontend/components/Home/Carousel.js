@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Pagination } from "swiper";
@@ -24,20 +24,22 @@ function Carousel() {
         {slides.length > 0 ? (
           slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <Image
+              {/* <Image
                 layout="fill"
                 src={`${slide.Image.url}`}
                 alt="Picture of the author"
-              />
+              /> */}
+              <img src={`${slide.Image.url}`} alt="" />
             </SwiperSlide>
           ))
         ) : (
           <SwiperSlide>
-            <Image
+            {/* <Image
               layout="fill"
               src="/images/bkupSlide.jpg"
               alt="Picture of the author"
-            />{" "}
+            /> */}
+            <img src="/images/bkupSlide.jpg" alt="" />
           </SwiperSlide>
         )}
       </Swiper>
