@@ -4,4 +4,5 @@ module.exports = {
     loader: "cloudinary",
     domains: ["res.cloudinary.com"],
   },
+  target: "serverless",
 };
