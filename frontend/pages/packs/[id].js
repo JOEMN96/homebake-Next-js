@@ -8,7 +8,6 @@ import styles from "../../styles/SingleCakePage.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Head from "next/head";
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
-import Image from "next/Image";
 
 SwiperCore.use([Navigation, Thumbs]);
 
