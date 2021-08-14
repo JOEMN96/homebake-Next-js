@@ -2,6 +2,20 @@ import styles from "../../styles/SurprisePacks.module.scss";
 import Link from "next/link";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { RiShoppingCartLine } from "react-icons/ri";
+import React from "react";
+
+const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+  return (
+    <AiOutlineArrowRight
+      style={{
+        verticalAlign: "sub",
+        marginTop: "1px",
+        fontSize: "18px",
+        marginLeft: "2px",
+      }}
+    />
+  );
+});
 
 function SurprisepackCard({ pack }) {
   const { title, price, description, images, id } = pack;
@@ -17,20 +31,13 @@ function SurprisepackCard({ pack }) {
       <div className="content">
         <div className="flex2">
           <h2>
-            <Link href={"/Cake/" + "id"}>
-              <a> {title}</a>
-            </Link>
+            <a> {title}</a>
           </h2>
           <button className="viewBtn">
             <Link href={"/packs/" + id}>
-              <AiOutlineArrowRight
-                style={{
-                  verticalAlign: "sub",
-                  marginTop: "1px",
-                  fontSize: "18px",
-                  marginLeft: "2px",
-                }}
-              />
+              <a>
+                <MyButton />
+              </a>
             </Link>
           </button>
         </div>

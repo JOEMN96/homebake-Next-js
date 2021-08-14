@@ -15,7 +15,6 @@ SwiperCore.use([Navigation, Thumbs]);
 function Packs({ cake }) {
   const { title, price, description, images } = cake;
 
-  console.log(cake);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -50,8 +49,9 @@ function Packs({ cake }) {
           >
             {images.map((image) => {
               return (
-                <SwiperSlide>
-                  <Image layout="fill" src={`${image.url}`} alt={title} />
+                <SwiperSlide key={image._id}>
+                  {/* <Image layout="fill" src={`${image.url}`} alt={title} /> */}
+                  <img src={`${image.url}`} alt="" />
                 </SwiperSlide>
               );
             })}
@@ -72,8 +72,9 @@ function Packs({ cake }) {
           >
             {images.map((image) => {
               return (
-                <SwiperSlide>
-                  <Image layout="fill" src={`${image.url}`} alt={title} />
+                <SwiperSlide key={image._id}>
+                  {/* <Image layout="fill" src={`${image.url}`} alt={title} /> */}
+                  <img src={`${image.url}`} alt="" />
                 </SwiperSlide>
               );
             })}
@@ -93,10 +94,10 @@ function Packs({ cake }) {
 
 export default Packs;
 
-Packs.getInitialProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
   const res = await axios.get(`surprise-packs/${ctx.query.id}`);
   const cake = await res.data;
   return {
-    cake,
+    props: { cake },
   };
-};
+}

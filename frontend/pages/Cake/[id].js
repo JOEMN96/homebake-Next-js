@@ -100,12 +100,12 @@ function Cake({ cake }) {
   );
 }
 
-Cake.getInitialProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
   const res = await axios.get(`cakes/${ctx.query.id}`);
   const cake = await res.data;
   return {
-    cake,
+    props: { cake },
   };
-};
+}
 
 export default Cake;

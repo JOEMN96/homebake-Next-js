@@ -69,13 +69,13 @@ function Blog({ blog }) {
   );
 }
 
-Blog.getInitialProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
   const res = await axios.get(`blogs/${ctx.query.id}`);
   const blog = await res.data;
 
   return {
-    blog,
+    props: { blog },
   };
-};
+}
 
 export default Blog;
