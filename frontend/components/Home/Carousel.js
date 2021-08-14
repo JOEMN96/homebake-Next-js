@@ -47,6 +47,10 @@ function Carousel() {
                 border-radius:10px;
             }
 
+            img {
+              width:100%;
+            }
+
         `}
       </style>
     </div>

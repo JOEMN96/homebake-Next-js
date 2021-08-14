@@ -6,7 +6,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { AiFillRead } from "react-icons/ai";
 
 function BlogsCard({ blog }) {
-  const { title, description, showCaseImage, created_at, id, author } = blog;
+  const { title, description, showCaseImage, createdAt, id, author } = blog;
   return (
     <article className="blogCard">
       <div className="img">
@@ -23,7 +23,7 @@ function BlogsCard({ blog }) {
         <p>{description}</p>
         <div className="icons">
           <FcCalendar />
-          <Moment format="MMMM Do YYYY" date={created_at}></Moment>
+          <Moment format="MMMM Do YYYY" date={createdAt}></Moment>
           <AiOutlineUser />
           <p style={{ display: "inline-block", marginBottom: 0 }}>{author}</p>
         </div>

@@ -49,7 +49,7 @@ function Cake({ cake }) {
           >
             {images.map((image) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={image._id}>
                   <img src={`${image.url}`} alt="" />
                 </SwiperSlide>
               );
@@ -71,7 +71,7 @@ function Cake({ cake }) {
           >
             {images.map((image) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={image._id}>
                   <img src={`${image.url}`} alt={title} />
                 </SwiperSlide>
               );
@@ -88,7 +88,9 @@ function Cake({ cake }) {
             <p>
               Available sizes:
               {size.length > 0 &&
-                size.map((size) => <span> {size.sizes}</span>)}
+                size.map((size, index) => (
+                  <span key={index}> {size.sizes}</span>
+                ))}
             </p>
           </div>
           <p>{description}</p>

@@ -3,6 +3,19 @@ import Link from "next/link";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
+const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+  return (
+    <AiOutlineArrowRight
+      style={{
+        verticalAlign: "sub",
+        marginTop: "1px",
+        fontSize: "18px",
+        marginLeft: "2px",
+      }}
+    />
+  );
+});
+
 function CakeCard({ cake }) {
   const { title, price, images, id } = cake;
   return (
@@ -23,14 +36,9 @@ function CakeCard({ cake }) {
           </h2>
           <button className="viewBtn">
             <Link href={"/Cake/" + id}>
-              <AiOutlineArrowRight
-                style={{
-                  verticalAlign: "sub",
-                  marginTop: "1px",
-                  fontSize: "18px",
-                  marginLeft: "2px",
-                }}
-              />
+              <a>
+                <MyButton />
+              </a>
             </Link>
           </button>
         </div>
