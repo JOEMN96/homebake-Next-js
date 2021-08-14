@@ -11,11 +11,10 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "knex": "0.21.18",
-    "sqlite3": "5.0.0",
+    "graphql": "^15.5.1",
     "strapi": "^3.6.6",
     "strapi-admin": "^3.6.6",
-    "strapi-connector-bookshelf": "3.6.5",
+    "strapi-connector-mongoose": "^3.6.6",
     "strapi-plugin-content-manager": "^3.6.6",
     "strapi-plugin-content-type-builder": "^3.6.6",
     "strapi-plugin-email": "3.6.5",
@@ -26,7 +25,7 @@
     "strapi-utils": "3.6.5"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Joe Mon"
   },
   "strapi": {
     "uuid": "a551f9a7-7de3-45d0-bd25-7a9b8846f60e"
