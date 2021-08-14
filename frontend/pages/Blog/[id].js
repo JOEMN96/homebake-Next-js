@@ -6,7 +6,7 @@ import { MdDateRange } from "react-icons/md";
 import { AiOutlineRead, AiOutlineUser } from "react-icons/ai";
 import marked from "marked";
 marked.use({
-  baseUrl: `${process.env.CMSDOMAIN}`,
+  baseUrl: `https://cakespotcms.herokuapp.com/`,
 });
 
 marked.Renderer.prototype.paragraph = (text) => {
@@ -42,7 +42,7 @@ function Blog({ blog }) {
       <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
         <div
           style={{
-            backgroundImage: `url(${process.env.CMSDOMAIN}${showCaseImage.url})`,
+            backgroundImage: `url(${showCaseImage.url})`,
           }}
           className={styles.banner}
         >
@@ -69,13 +69,13 @@ function Blog({ blog }) {
   );
 }
 
-Blog.getInitialProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
   const res = await axios.get(`blogs/${ctx.query.id}`);
-  const blog = res.data;
+  const blog = await res.data;
 
   return {
-    blog,
+    props: { blog },
   };
-};
+}
 
 export default Blog;

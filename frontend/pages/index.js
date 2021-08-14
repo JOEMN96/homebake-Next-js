@@ -43,7 +43,15 @@ export default function Home({ trending }) {
         <section className="Trendingblogs">
           <Row>
             {blogs.map((blog) => (
-              <Col key={blog.id} xs={24} sm={12} md={6} lg={8} xl={8}>
+              <Col
+                style={{ padding: "20px" }}
+                key={blog.id}
+                xs={24}
+                sm={12}
+                md={12}
+                lg={12}
+                xl={12}
+              >
                 <BlogsCard blog={blog} />
               </Col>
             ))}

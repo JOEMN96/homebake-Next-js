@@ -7,7 +7,6 @@ import "swiper/components/thumbs/thumbs.min.css";
 import styles from "../../styles/SingleCakePage.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Head from "next/head";
-import Image from "next/image";
 
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
 
@@ -51,11 +50,7 @@ function Cake({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide>
-                  <Image
-                    layout="fill"
-                    src={`${process.env.CMSDOMAIN}${image.url}`}
-                    alt={title}
-                  />
+                  <img src={`${image.url}`} alt="" />
                 </SwiperSlide>
               );
             })}
@@ -77,10 +72,7 @@ function Cake({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide>
-                  <img
-                    src={`${process.env.CMSDOMAIN}${image.url}`}
-                    alt={title}
-                  />
+                  <img src={`${image.url}`} alt={title} />
                 </SwiperSlide>
               );
             })}
@@ -108,12 +100,12 @@ function Cake({ cake }) {
   );
 }
 
-Cake.getInitialProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
   const res = await axios.get(`cakes/${ctx.query.id}`);
-  const cake = res.data;
+  const cake = await res.data;
   return {
-    cake,
+    props: { cake },
   };
-};
+}
 
 export default Cake;

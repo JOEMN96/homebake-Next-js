@@ -1,8 +1,6 @@
 module.exports = {
-  env: {
-    CMSDOMAIN: "http://localhost:1337",
-  },
   images: {
-    domains: ["localhost"],
+    domains: ["res.cloudinary.com"],
   },
+  target: "serverless",
 };

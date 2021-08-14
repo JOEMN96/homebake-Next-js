@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import SwiperCore, { Pagination } from "swiper";
@@ -21,25 +20,15 @@ function Carousel() {
   return (
     <div className="swiperWrapper">
       <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
-        {slides.length > 1 ? (
+        {slides.length > 0 ? (
           slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              {/* <img src={`${process.env.CMSDOMAIN}${slide.Image.url}`} alt="" /> */}
-              <Image
-                layout="fill"
-                src={`${process.env.CMSDOMAIN}${slide.Image.url}`}
-                alt="Picture of the author"
-              />
+              <img src={`${slide.Image.url}`} alt="" />
             </SwiperSlide>
           ))
         ) : (
           <SwiperSlide>
-            {" "}
-            <Image
-              layout="fill"
-              src="/images/Chocolate+Mirror+Cake+1200.jpg"
-              alt="Picture of the author"
-            />{" "}
+            <img src="/images/bkupSlide.jpg" alt="" />
           </SwiperSlide>
         )}
       </Swiper>

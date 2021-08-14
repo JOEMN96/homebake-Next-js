@@ -6,18 +6,11 @@ import { AiOutlineUser } from "react-icons/ai";
 import { AiFillRead } from "react-icons/ai";
 
 function BlogsCard({ blog }) {
-  console.log(blog);
   const { title, description, showCaseImage, created_at, id, author } = blog;
   return (
     <article className="blogCard">
       <div className="img">
-        {/* <Image
-          width={200}
-          height={220}
-          src={`${process.env.CMSDOMAIN}${showCaseImage.url}`}
-          alt={title}
-        /> */}
-        <img src={`${process.env.CMSDOMAIN}${showCaseImage.url}`} alt={title} />
+        <img src={`${showCaseImage.url}`} alt={title} />
       </div>
 
       <div className="contents">
@@ -46,12 +39,12 @@ function BlogsCard({ blog }) {
         {`
           article {
             display: flex;
-            margin: 20px;
             border: 2px solid #f2f2f2;
             border-radius: 8px;
+            width: 100%;
           }
           .img {
-            width: 100%;
+            width: 50%;
           }
           .img img {
             width: 100%;
@@ -59,6 +52,7 @@ function BlogsCard({ blog }) {
           }
           .contents {
             padding: 5px 10px;
+            flex-basis: 50%;
           }
           h2 {
             font-family: "Roboto Slab", serif;

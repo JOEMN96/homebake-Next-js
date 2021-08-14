@@ -8,14 +8,12 @@ import styles from "../../styles/SingleCakePage.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Head from "next/head";
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
-import Image from "next/Image";
 
 SwiperCore.use([Navigation, Thumbs]);
 
 function Packs({ cake }) {
   const { title, price, description, images } = cake;
 
-  console.log(cake);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -50,12 +48,9 @@ function Packs({ cake }) {
           >
             {images.map((image) => {
               return (
-                <SwiperSlide>
-                  <Image
-                    layout="fill"
-                    src={`${process.env.CMSDOMAIN}${image.url}`}
-                    alt={title}
-                  />
+                <SwiperSlide key={image._id}>
+                  {/* <Image layout="fill" src={`${image.url}`} alt={title} /> */}
+                  <img src={`${image.url}`} alt="" />
                 </SwiperSlide>
               );
             })}
@@ -76,12 +71,9 @@ function Packs({ cake }) {
           >
             {images.map((image) => {
               return (
-                <SwiperSlide>
-                  <Image
-                    layout="fill"
-                    src={`${process.env.CMSDOMAIN}${image.url}`}
-                    alt={title}
-                  />
+                <SwiperSlide key={image._id}>
+                  {/* <Image layout="fill" src={`${image.url}`} alt={title} /> */}
+                  <img src={`${image.url}`} alt="" />
                 </SwiperSlide>
               );
             })}
@@ -101,11 +93,10 @@ function Packs({ cake }) {
 
 export default Packs;
 
-Packs.getInitialProps = async (ctx) => {
-  console.log(ctx);
+export async function getServerSideProps(ctx) {
   const res = await axios.get(`surprise-packs/${ctx.query.id}`);
-  const cake = res.data;
+  const cake = await res.data;
   return {
-    cake,
+    props: { cake },
   };
-};
+}

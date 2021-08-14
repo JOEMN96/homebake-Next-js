@@ -11,6 +11,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "graphql": "^15.5.1",
     "strapi": "^3.6.6",
     "strapi-admin": "^3.6.6",
     "strapi-connector-mongoose": "^3.6.6",
@@ -20,10 +21,11 @@
     "strapi-plugin-i18n": "^3.6.6",
     "strapi-plugin-upload": "^3.6.6",
     "strapi-plugin-users-permissions": "^3.6.6",
+    "strapi-provider-upload-cloudinary": "^3.6.6",
     "strapi-utils": "3.6.5"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Joe Mon"
   },
   "strapi": {
     "uuid": "a551f9a7-7de3-45d0-bd25-7a9b8846f60e"
