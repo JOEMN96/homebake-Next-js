@@ -94,9 +94,8 @@ function Packs({ cake }) {
 export default Packs;
 
 Packs.getInitialProps = async (ctx) => {
-  console.log(ctx);
   const res = await axios.get(`surprise-packs/${ctx.query.id}`);
-  const cake = res.data;
+  const cake = await res.data;
   return {
     cake,
   };

@@ -71,7 +71,7 @@ function Blog({ blog }) {
 
 Blog.getInitialProps = async (ctx) => {
   const res = await axios.get(`blogs/${ctx.query.id}`);
-  const blog = res.data;
+  const blog = await res.data;
 
   return {
     blog,

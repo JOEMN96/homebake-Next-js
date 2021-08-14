@@ -102,7 +102,7 @@ function Cake({ cake }) {
 
 Cake.getInitialProps = async (ctx) => {
   const res = await axios.get(`cakes/${ctx.query.id}`);
-  const cake = res.data;
+  const cake = await res.data;
   return {
     cake,
   };
