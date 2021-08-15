@@ -50,7 +50,7 @@ function Cake({ cake }) {
             {images.map((image) => {
               return (
                 <SwiperSlide key={image._id}>
-                  <img src={`${image.url}`} alt="" />
+                  <img className={styles.img} src={`${image.url}`} alt="" />
                 </SwiperSlide>
               );
             })}

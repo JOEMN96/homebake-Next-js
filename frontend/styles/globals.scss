@@ -168,6 +168,7 @@ nav {
     border-color: #49A159  !important;
 }
 
+
 .ant-spin {
     position: absolute;
     left: 50%;
@@ -178,10 +179,18 @@ nav {
   background-color: #49A159  !important;
 }
 
+.ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+    border-color: #49A159  !important;
+}
+
 .fallback {
   height: 90vh;
   display: grid;
   place-items: center;
+}
+
+.ant-input:focus, .ant-input-focused {
+  border-color: #49A159;
 }
 
 //  Media Query
@@ -223,6 +232,11 @@ nav {
       margin-left: -50px;
       top: 42%;
     }
-  
+  }
+  .carousel .swiper-container {
+    height: 50vh;
+  }
+  .carousel .swiper-container img {
+    height: 100%;
   }
 }

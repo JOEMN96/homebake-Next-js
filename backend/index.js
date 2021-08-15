@@ -2,6 +2,7 @@ import express from "express";
 import userRouter from "./routes/user";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
 mongoose.connect(
@@ -22,6 +23,7 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(cookieParser("ASECRETSTRING"));
+app.use(cors());
 
 // ! Add .env Above
 app.get("/", (req, res) => {

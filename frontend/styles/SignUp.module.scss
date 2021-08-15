@@ -1,0 +1,22 @@
+.signUp {
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        margin-top: 40px;
+        h1 {
+            text-align: center;
+        }
+        .pw {
+            margin-top: 15px;
+        }
+        .signUpBtn {
+            margin: 10px 0;
+            text-align: center;
+            button {
+                background: #49a159 !important;
+                color: white !important;
+                border: 1px solid #49a159 !important;
+            }
+        }
+    }
+}

@@ -18,7 +18,7 @@ function Carousel() {
     getSliderData();
   }, []);
   return (
-    <div className="swiperWrapper">
+    <div className="swiperWrapper carousel">
       <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
         {slides.length > 0 ? (
           slides.map((slide, index) => (

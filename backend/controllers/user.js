@@ -1,7 +1,7 @@
 import USER from "../models/user";
 
 const signUp = async (req, res) => {
-  const { password, email, name } = req.body;
+  const { password, email, name, phoneNumber } = req.body;
 
   const alreadyRegUser = await USER.findOne({ email });
   if (alreadyRegUser) {
@@ -9,7 +9,7 @@ const signUp = async (req, res) => {
   }
 
   try {
-    const _user = new USER({ password, email, name });
+    const _user = new USER({ password, email, name, phoneNumber });
     await _user.save();
     const token = await _user.generateJWT();
     res.cookie("jwt", token, {
@@ -20,7 +20,7 @@ const signUp = async (req, res) => {
     });
     return res.status(201).send(_user);
   } catch (error) {
-    return res.status(400).send({ err: error.message });
+    return res.status(401).send({ err: error.message });
   }
 };
 
