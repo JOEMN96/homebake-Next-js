@@ -23,8 +23,15 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(cookieParser("ASECRETSTRING"));
-app.use(cors());
-
+app.use(cors({ origin: true, optionsSuccessStatus: 200, credentials: true }));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 // ! Add .env Above
 app.get("/", (req, res) => {
   res.status(200).send("Webserver is Working");

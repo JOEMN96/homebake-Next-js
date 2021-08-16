@@ -14,31 +14,34 @@ import axios from "../helpers/backendAxios";
 
 function SignUp() {
   const [button, setButton] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const onFinish = async (values) => {
+    const val = { ...values };
+    setErrors([]);
     try {
-      const res = await axios.post("/signUp", values);
+      const res = await axios.post("/signUp", val);
+
+      if (res.status === 201) {
+        setButton(false);
+      }
       console.log(res);
     } catch (error) {
-      console.log(error);
+      if (error.response.status == 400) {
+        return setErrors([error.response.data]);
+      }
+      setErrors(error.response.data.errors);
+      setButton(false);
     }
-
-    console.log("Success:", values);
-    setButton(true);
   };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-    setButton(false);
-  };
-
+  console.log(errors);
   return (
     <section className={styles.signUp}>
       <div className="titleWrapper">
         <h1 className="headings">Create Account</h1>
         <h2>Sign Up</h2>
       </div>
-      <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
+      <Form onFinish={onFinish}>
         <h1>Logo here</h1>
         <div className={styles.pw}>
           <Form.Item
@@ -115,6 +118,12 @@ function SignUp() {
           >
             <Input placeholder="Phone Number" suffix={<MobileOutlined />} />
           </Form.Item>
+        </div>
+        <div className={styles.errorArea}>
+          {errors?.length > 0 &&
+            errors.map((error, index) => {
+              return <p key={index}>{error.msg}</p>;
+            })}
         </div>
         <div className={styles.signUpBtn}>
           <ButtonLoading

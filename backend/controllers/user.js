@@ -4,6 +4,7 @@ const signUp = async (req, res) => {
   const { password, email, name, phoneNumber } = req.body;
 
   const alreadyRegUser = await USER.findOne({ email });
+
   if (alreadyRegUser) {
     return res.status(400).send({ msg: "Email is already taken" });
   }
@@ -13,10 +14,10 @@ const signUp = async (req, res) => {
     await _user.save();
     const token = await _user.generateJWT();
     res.cookie("jwt", token, {
-      httpOnly: true,
-      sameSite: true,
+      httpOnly: false,
       signed: true,
       secure: false,
+      maxAge: 1000 * 60 * 15,
     });
     return res.status(201).send(_user);
   } catch (error) {
@@ -34,8 +35,8 @@ const signIn = async (req, res) => {
     const token = await user.generateJWT();
 
     res.cookie("jwt", token, {
-      httpOnly: true,
-      sameSite: true,
+      httpOnly: false,
+      sameSite: false,
       signed: true,
       secure: false,
     });

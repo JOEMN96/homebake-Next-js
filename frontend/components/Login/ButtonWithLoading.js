@@ -8,10 +8,7 @@ class ButtonWithLoading extends React.Component {
   };
 
   enterLoading = (index) => {
-    this.setState({ loadings: !this.state.loadings });
-    setTimeout(() => {
-      this.setState({ loadings: !this.state.loadings });
-    }, 3000);
+    this.setState({ loadings: index });
   };
 
   render() {
@@ -24,7 +21,7 @@ class ButtonWithLoading extends React.Component {
           className="btn"
           icon={<ArrowRightOutlined />}
           loading={loadings}
-          onClick={() => this.enterLoading()}
+          onClick={() => this.enterLoading(prop.status)}
         >
           {prop.name}
         </Button>
