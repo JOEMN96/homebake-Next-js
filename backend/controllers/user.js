@@ -14,9 +14,8 @@ const signUp = async (req, res) => {
     await _user.save();
     const token = await _user.generateJWT();
     res.cookie("jwt", token, {
-      httpOnly: false,
+      httpOnly: true,
       signed: true,
-      secure: false,
       maxAge: 1000 * 60 * 15,
     });
     return res.status(201).send(_user);
@@ -35,10 +34,11 @@ const signIn = async (req, res) => {
     const token = await user.generateJWT();
 
     res.cookie("jwt", token, {
-      httpOnly: false,
+      httpOnly: true,
       sameSite: false,
       signed: true,
       secure: false,
+      maxAge: 100000,
     });
 
     res.status(200).send(user);

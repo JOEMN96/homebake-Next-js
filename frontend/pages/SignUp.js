@@ -11,10 +11,13 @@ import {
 import ButtonLoading from "../components/Login/ButtonWithLoading";
 import { useState } from "react";
 import axios from "../helpers/backendAxios";
+import { useRouter } from "next/router";
 
 function SignUp() {
   const [button, setButton] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [done, setDone] = useState(false);
+  const router = useRouter();
 
   const onFinish = async (values) => {
     const val = { ...values };
@@ -24,17 +27,25 @@ function SignUp() {
 
       if (res.status === 201) {
         setButton(false);
+        setDone(true);
+        console.log("fird");
+        router.push("/Profile");
       }
       console.log(res);
     } catch (error) {
       if (error.response.status == 400) {
-        return setErrors([error.response.data]);
+        console.log(error.response.data.msg);
+        setDone(false);
+        return setErrors(
+          error.response.data.errors || [{ msg: error.response.data.msg }]
+        );
       }
-      setErrors(error.response.data.errors);
+      setErrors(error.response.data.errors || []);
       setButton(false);
+      setDone(false);
     }
   };
-  console.log(errors);
+
   return (
     <section className={styles.signUp}>
       <div className="titleWrapper">
@@ -120,10 +131,13 @@ function SignUp() {
           </Form.Item>
         </div>
         <div className={styles.errorArea}>
-          {errors?.length > 0 &&
-            errors.map((error, index) => {
+          {errors?.length != 0 &&
+            errors?.map((error, index) => {
               return <p key={index}>{error.msg}</p>;
             })}
+        </div>
+        <div className={styles.sucessArea}>
+          {done ? <p> Sucess User Created </p> : ""}
         </div>
         <div className={styles.signUpBtn}>
           <ButtonLoading
