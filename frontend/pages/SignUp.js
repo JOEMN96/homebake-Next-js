@@ -33,7 +33,7 @@ function SignUp() {
       }
       console.log(res);
     } catch (error) {
-      if (error.response.status == 400) {
+      if (error.response?.status == 400) {
         console.log(error.response.data.msg);
         setDone(false);
         return setErrors(

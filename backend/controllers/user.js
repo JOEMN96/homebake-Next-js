@@ -15,8 +15,10 @@ const signUp = async (req, res) => {
     const token = await _user.generateJWT();
     res.cookie("jwt", token, {
       httpOnly: true,
+      sameSite: false,
       signed: true,
-      maxAge: 1000 * 60 * 15,
+      secure: false,
+      maxAge: 86400,
     });
     return res.status(201).send(_user);
   } catch (error) {

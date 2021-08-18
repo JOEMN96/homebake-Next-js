@@ -1,11 +1,26 @@
 import { useState, useEffect } from "react";
 import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
+import ProtectedRoute from "../components/Auth/ProtectedRoutes";
+
+const fetchProf = async () => {
+  try {
+    const res = await axios.get("profile");
+    console.log("fired");
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+    console.log(error.response);
+    return { redirect: { destination: "/SignUp", permanent: false } };
+  }
+};
 
 function Profile(props) {
   const [profile, setProfile] = useState(undefined);
   const router = useRouter();
-
+  useEffect(() => {
+    fetchProf();
+  }, []);
   const handleLogout = async () => {
     const res = await axios.get("logout");
     router.push("/SignUp");
@@ -17,29 +32,6 @@ function Profile(props) {
       <button> LogOut </button>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  // try {
-  //   const res = await axios.get("profile");
-  //   console.log("fired");
-  //   console.log(res);
-  //   return { props: { res } };
-  // } catch (error) {
-  //   console.log(error);
-  // return { redirect: { destination: "/SignUp", permanent: false } };
-  //   return { props: {} };
-  // }
-  const res = await axios.get("profile");
-  console.log(res);
-  return { props: { res } };
-  // if (res.status === 307 || res.status === 401) {
-  //   console.log("fired");
-  //   return {
-  //     props: res.data,
-  //   };
-  // } else {
-  // }
 }
 
 export default Profile;
