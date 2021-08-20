@@ -11,6 +11,11 @@ const fetchPacks = async () => {
 
 function SurprisePacks() {
   const { data, status } = useQuery("packs", fetchPacks);
+
+  if (status == "loading") {
+    return <Spin wrapperClassName="loader" size="large" />;
+  }
+
   return (
     <div>
       <section className="packsHeader"></section>
@@ -18,7 +23,6 @@ function SurprisePacks() {
         <h1 className="headings">Surprise</h1>
         <h2>Packs</h2>
       </div>
-      {status == "loading" && <Spin wrapperClassName="loader" size="large" />}
       {status == "error" && (
         <h1 style={{ textAlign: "center" }}>
           Currently there is No Product available Available

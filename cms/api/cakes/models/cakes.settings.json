@@ -40,6 +40,29 @@
       "type": "component",
       "repeatable": true,
       "component": "sizes.size"
+    },
+    "EggOReggless": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "shape": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shapes.shape"
+    },
+    "Flavour": {
+      "type": "enumeration",
+      "enum": [
+        "Chocolate",
+        "Black Forest",
+        "Velvet",
+        "Flavors",
+        "Rainbow",
+        "Exotic",
+        "Designer cakes"
+      ],
+      "required": false
     }
   }
 }

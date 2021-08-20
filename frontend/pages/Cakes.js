@@ -2,13 +2,8 @@ import React, { useState } from "react";
 import styles from "../styles/Cakes.module.scss";
 import axios from "../helpers/Axios";
 import { useQuery } from "react-query";
-import { Dropdown, Button, Menu, Drawer, Row, Col, Spin } from "antd";
-import { BiSortZA } from "react-icons/bi";
-import {
-  FaSortAmountDownAlt,
-  FaSortAmountUpAlt,
-  FaFilter,
-} from "react-icons/fa";
+import { Row, Col, Spin } from "antd";
+
 import CakeCard from "../components/Home/CakeCard";
 
 const fetchCakeData = async (params) => {
@@ -30,59 +25,19 @@ function Cakes() {
   const [sidebar, setSidebar] = useState(false);
   const { data, status } = useQuery(["cakes", sort], fetchCakeData);
 
-  //  ? Handling Price Sorting
-  function handleMenuClick(e) {
-    setSort(e.key);
-  }
-  // ? Sidebar Functions
-  function showDrawer() {
-    setSidebar(!sidebar);
+  if (status == "loading") {
+    return <Spin wrapperClassName="loader" size="large" />;
   }
 
-  function onClose() {
-    setSidebar(!sidebar);
-  }
-
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="ASC" icon={<FaSortAmountUpAlt />}>
-        Low to High
-      </Menu.Item>
-      <Menu.Item key="DESC" icon={<FaSortAmountDownAlt />}>
-        High to Low
-      </Menu.Item>
-    </Menu>
-  );
   return (
     <section className={styles.cakesPage}>
       <section className="cakesPageHeader"></section>
-
-      <Button className={styles.filterDrawer} onClick={showDrawer}>
-        <FaFilter color="#49A159" />
-      </Button>
-      <Drawer
-        title="Cake Spot"
-        placement="left"
-        closable={false}
-        onClose={onClose}
-        visible={sidebar}
-        key="left"
-      >
-        <div className={styles.filterDataConrols}>
-          <Dropdown overlay={menu}>
-            <Button className={styles.sortBtn}>
-              Sort <BiSortZA />
-            </Button>
-          </Dropdown>
-        </div>
-      </Drawer>
 
       <div className="titleWrapper">
         <h1 className="headings">Showcase</h1>
         <h2>Cakes</h2>
       </div>
 
-      {status == "loading" && <Spin wrapperClassName="loader" size="large" />}
       {status == "error" && (
         <h1 style={{ textAlign: "center" }}>
           Currently there is No Product available Available

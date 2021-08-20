@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
-import ProtectedRoute from "../components/Auth/ProtectedRoutes";
 
 const fetchProf = async () => {
   try {

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shapes_shapes",
+  "info": {
+    "name": "shape",
+    "icon": "bowling-ball",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Shape": {
+      "type": "string"
+    }
+  }
+}

@@ -13,6 +13,9 @@ const fetchBlogs = async () => {
 function Blog() {
   const { data, status } = useQuery("blogs", fetchBlogs);
 
+  if (status == "loading") {
+    return <Spin wrapperClassName="loader" size="large" />;
+  }
   return (
     <div>
       <section className="blogPageHeader"></section>
@@ -20,7 +23,7 @@ function Blog() {
         <h1 className="headings">News</h1>
         <h2>Blogs</h2>
       </div>
-      {status == "loading" && <Spin wrapperClassName="loader" size="large" />}
+
       {status == "error" && (
         <h1 style={{ textAlign: "center" }}>
           Currently there is No Product available Available

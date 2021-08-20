@@ -43,10 +43,19 @@ class Navbar extends React.Component {
               <Link href="/SurprisePacks">Surprise Packs</Link>
             </li>
             <li>
+              <Link href="/Deserts">Deserts</Link>
+            </li>
+            <li>
               <Link href="/Blogs">Blogs</Link>
             </li>
             <li>
+              <Link href="/Gallery">Gallery</Link>
+            </li>
+            <li>
               <Link href="/About">About</Link>
+            </li>
+            <li>
+              <Link href="/Contact">Contact Us</Link>
             </li>
           </ul>
         </Drawer>
@@ -74,6 +83,13 @@ class Navbar extends React.Component {
               </li>
               <li
                 className={
+                  this.props.router.pathname == "/Deserts" ? "navActive" : ""
+                }
+              >
+                <Link href="/Deserts">Deserts</Link>
+              </li>
+              <li
+                className={
                   this.props.router.pathname == "/Blogs" ? "navActive" : ""
                 }
               >
@@ -85,6 +101,20 @@ class Navbar extends React.Component {
                 }
               >
                 <Link href="/About">About</Link>
+              </li>
+              <li
+                className={
+                  this.props.router.pathname == "/Gallery" ? "navActive" : ""
+                }
+              >
+                <Link href="/Gallery">Gallery</Link>
+              </li>
+              <li
+                className={
+                  this.props.router.pathname == "/Contact" ? "navActive" : ""
+                }
+              >
+                <Link href="/Contact">Contact US</Link>
               </li>
             </ul>
 
