@@ -41,6 +41,7 @@
 html,
 body {
   font-family: 'Euclid Square', sans-serif;
+  scroll-behavior: smooth;
 }
 body {
   max-width:1600px;
@@ -168,7 +169,16 @@ nav {
     border-color: #49A159  !important;
 }
 
+.ant-radio-group-solid
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  background: #49a159 !important;
+border-color: #49a159 !important;
 
+}
+.ant-radio-button-wrapper:hover {
+  color: #49A159  !important;
+
+}
 .ant-spin {
     position: absolute;
     left: 50%;
@@ -216,6 +226,12 @@ nav {
   }
 }
 
+@media  (max-width: 575px) { 
+  .ant-col-xs-24 article {
+    margin: 20px auto !important;
+  }
+}
+
 @media  (max-width: 450px) {
   .titleWrapper {
      h1 {
@@ -240,3 +256,4 @@ nav {
     height: 100%;
   }
 }
+

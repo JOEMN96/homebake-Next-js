@@ -7,7 +7,7 @@ import "swiper/components/thumbs/thumbs.min.css";
 import styles from "../../styles/SingleCakePage.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Head from "next/head";
-
+import { Radio } from "antd";
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
 
 // install Swiper modules
@@ -15,8 +15,24 @@ SwiperCore.use([Navigation, Thumbs]);
 
 function Cake({ cake }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const { description, images, offer, price, title, size } = cake;
+  const {
+    description,
+    images,
+    offer,
+    price,
+    title,
+    size,
+    EggOReggless,
+    shape,
+  } = cake;
+  console.log(cake);
 
+  const handleChecked = (e) => {
+    console.log("radio checked", e.target.value);
+  };
+  const handleShape = (e) => {
+    console.log("radio checked", e.target.value);
+  };
   return (
     <section className={styles.cakePage}>
       <Head>
@@ -94,6 +110,30 @@ function Cake({ cake }) {
             </p>
           </div>
           <p>{description}</p>
+          {EggOReggless && (
+            <Radio.Group
+              defaultValue="a"
+              onChange={handleChecked}
+              buttonStyle="solid"
+            >
+              <Radio.Button value="eggless">Eggless</Radio.Button>
+              <Radio.Button value="egg">Egg</Radio.Button>
+            </Radio.Group>
+          )}
+
+          <div className={styles.shape}>
+            {shape.length > 0 && (
+              <Radio.Group
+                defaultValue="a"
+                onChange={handleShape}
+                buttonStyle="solid"
+              >
+                {shape.map((sz) => (
+                  <Radio.Button value={sz.Shape}>{sz.Shape}</Radio.Button>
+                ))}
+              </Radio.Group>
+            )}
+          </div>
           <button>Buy Now</button>
         </Col>
       </Row>

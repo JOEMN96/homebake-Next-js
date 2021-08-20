@@ -49,6 +49,11 @@ function SurprisePacks() {
           .packsHeader {
             height: 40vh;
           }
+          .ant-radio-group-solid
+            .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+            color: #49a159 !important;
+            border-color: #49a159 !important;
+          }
         `}
       </style>
     </div>
