@@ -30,3 +30,20 @@
     color: #49a159;
     text-align: center;
 }
+
+.alreadyHaveAc {
+    text-align: center;
+    p {
+        color: #49a159;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    svg {
+        font-size: 16px;
+        vertical-align: middle;
+    }
+
+}

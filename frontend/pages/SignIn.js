@@ -4,7 +4,6 @@ import {
   EyeInvisibleOutlined,
   EyeTwoTone,
   UserOutlined,
-  MobileOutlined,
   GoogleOutlined,
 } from "@ant-design/icons";
 import { BiLogIn } from "react-icons/bi";
@@ -15,7 +14,7 @@ import { useState } from "react";
 import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
 
-function SignUp() {
+function SignIn() {
   const [button, setButton] = useState(false);
   const [errors, setErrors] = useState([]);
   const [done, setDone] = useState(false);
@@ -23,54 +22,35 @@ function SignUp() {
 
   const onFinish = async (values) => {
     const val = { ...values };
+
+    console.log("values", val);
     setErrors([]);
     try {
-      const res = await axios.post("/signUp", val);
-
-      if (res.status === 201) {
+      const res = await axios.post("/signIn", val);
+      if (res.status === 200) {
         setButton(false);
         setDone(true);
         console.log("fird");
         router.push("/Profile");
       }
-      console.log(res);
     } catch (error) {
-      if (error.response?.status == 400) {
-        console.log(error.response.data.msg);
-        setDone(false);
-        return setErrors(
-          error.response.data.errors || [{ msg: error.response.data.msg }]
-        );
+      if (error.response.status === 401) {
+        setErrors([{ msg: error.response.data.err }]);
+      } else if (error.response.status === 400) {
+        setErrors([{ msg: error.response.data.errors[0].msg }]);
       }
-      setErrors(error.response.data.errors || []);
-      setButton(false);
-      setDone(false);
     }
   };
 
   return (
     <section className={styles.signUp}>
       <div className="titleWrapper">
-        <h1 className="headings">Create Account</h1>
-        <h2>Sign Up</h2>
+        <h1 className="headings">Welcome back</h1>
+        <h2>Sign In</h2>
       </div>
       <Form onFinish={onFinish}>
         <h1>Logo here</h1>
-        <div className={styles.pw}>
-          <Form.Item
-            name="name"
-            rules={[
-              { required: true, message: "Please input your username!" },
-              { min: 3, message: "Username must be minimum 5 characters." },
-            ]}
-          >
-            <Input
-              placeholder="User Name"
-              name="name"
-              suffix={<MobileOutlined />}
-            />
-          </Form.Item>
-        </div>
+
         <div className={styles.pw}>
           <Form.Item
             name="email"
@@ -111,27 +91,7 @@ function SignUp() {
             />
           </Form.Item>
         </div>
-        <div className={styles.pw}>
-          <Form.Item
-            name="phoneNumber"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Phone Number!",
-              },
-              {
-                min: 10,
-                message: "Must be 10 Digits",
-              },
-              {
-                max: 10,
-                message: "Must be 10 Digits",
-              },
-            ]}
-          >
-            <Input placeholder="Phone Number" suffix={<MobileOutlined />} />
-          </Form.Item>
-        </div>
+
         <div className={styles.errorArea}>
           {errors?.length != 0 &&
             errors?.map((error, index) => {
@@ -139,22 +99,22 @@ function SignUp() {
             })}
         </div>
         <div className={styles.sucessArea}>
-          {done ? <p> Sucess User Created </p> : ""}
+          {done ? <p> ...Logging In </p> : ""}
         </div>
         <div className={styles.signUpBtn}>
           <ButtonLoading
             htmlType="submit"
-            elms={{ name: "Sign Up", status: button }}
+            elms={{ name: "Log In", status: button }}
           />
           <Button style={{ margin: "0 10px" }}>
-            <GoogleOutlined /> Sign Up With Google
+            <GoogleOutlined /> Log In With Google
           </Button>
         </div>
         <div className={styles.alreadyHaveAc}>
-          <Link href="/SignIn">
+          <Link href="/SignUp">
             <a>
               <p>
-                Already have account SignIn <BiLogIn />
+                Don't have account SignUp Here <BiLogIn />
               </p>
             </a>
           </Link>
@@ -164,4 +124,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignIn;

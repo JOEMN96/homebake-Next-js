@@ -10,8 +10,8 @@ import { auth } from "../middlewares/auth";
 
 const router = Router();
 
-router.post("/signUp", validateSignIn, isValid, signUp);
-router.post("/signIn", validateSignUp, isValid, signIn);
+router.post("/signUp", validateSignUp, isValid, signUp);
+router.post("/signIn", validateSignIn, isValid, signIn);
 router.get("/profile", auth, userProfile);
 router.get("/logout", auth, logout);
 

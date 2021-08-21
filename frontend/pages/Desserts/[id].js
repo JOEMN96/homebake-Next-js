@@ -16,7 +16,6 @@ SwiperCore.use([Navigation, Thumbs]);
 function Dessert({ dessert }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { description, images, offer, price, title, EggOReggless } = dessert;
-  console.log(dessert);
 
   const handleChecked = (e) => {
     console.log("radio checked", e.target.value);
@@ -88,10 +87,9 @@ function Dessert({ dessert }) {
         <Col className={styles.col2} xs={24} sm={24} md={8} lg={12} xl={12}>
           <h1>{title}</h1>
           <h3>
-            ₹ {price}{" "}
+            ₹ {price}
             {offer && <span className={styles.offer}>{"-" + offer}</span>}
           </h3>
-
           <p>{description}</p>
           {EggOReggless && (
             <Radio.Group

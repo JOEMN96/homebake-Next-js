@@ -18,7 +18,7 @@ const signUp = async (req, res) => {
       sameSite: false,
       signed: true,
       secure: false,
-      maxAge: 86400,
+      maxAge: 2 * 60 * 60 * 1000,
     });
     return res.status(201).send(_user);
   } catch (error) {
@@ -40,12 +40,11 @@ const signIn = async (req, res) => {
       sameSite: false,
       signed: true,
       secure: false,
-      maxAge: 100000,
+      maxAge: 2 * 60 * 60 * 1000,
     });
 
     res.status(200).send(user);
   } catch (error) {
-    console.log(error.stack);
     res.status(401).send({ err: error.message });
   }
 };
