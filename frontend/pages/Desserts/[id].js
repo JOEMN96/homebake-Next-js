@@ -1,5 +1,4 @@
-// import axios from "../../helpers/Axios";
-import axios from "axios";
+import axios from "../../helpers/Axios";
 import { useState } from "react";
 import { Row, Col } from "antd";
 import "swiper/swiper.min.css";
@@ -114,9 +113,7 @@ function Dessert({ dessert }) {
 }
 
 export async function getServerSideProps(ctx) {
-  //   const res = await axios.get(`desserts/${ctx.query.id}`);
-  const res = await axios.get(`http://localhost:1337/desserts/${ctx.query.id}`);
-
+  const res = await axios.get(`desserts/${ctx.query.id}`);
   const dessert = await res.data;
   return {
     props: { dessert },

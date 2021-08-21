@@ -1,12 +1,10 @@
-// import axios from "../helpers/Axios";
-import axios from "axios";
+import axios from "../helpers/Axios";
 import { useQuery } from "react-query";
 import { Row, Col, Spin } from "antd";
 import DessertCard from "../components/desserts/DessertCard";
 
 const fetchDesserts = async () => {
-  // const res = await axios.get(`desserts`);
-  const res = await axios.get("http://localhost:1337/desserts");
+  const res = await axios.get(`desserts`);
   const data = await res.data;
   return data;
 };
