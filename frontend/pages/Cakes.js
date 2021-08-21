@@ -13,11 +13,11 @@ import CakeCard from "../components/Home/CakeCard";
 const fetchCakeData = async (params) => {
   const sort = params.queryKey[1];
 
-  if (sort) {
-    const res = await axios.get(`cakes?_sort=price:${sort}`);
-    const data = await res.data;
-    return data;
-  }
+  // if (sort) {
+  //   const res = await axios.get(`cakes?_sort=price:${sort}`);
+  //   const data = await res.data;
+  //   return data;
+  // }
 
   const res = await axios.get("cakes");
   const data = await res.data;
@@ -25,9 +25,8 @@ const fetchCakeData = async (params) => {
 };
 
 function Cakes() {
-  const [sort, setSort] = useState(null);
   const [filter, setFilter] = useState([]);
-  const { data, status } = useQuery(["cakes", sort], fetchCakeData);
+  const { data, status } = useQuery(["cakes"], fetchCakeData);
 
   if (status == "loading") {
     return <Spin wrapperClassName="loader" size="large" />;
