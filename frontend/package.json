@@ -18,6 +18,9 @@
     "react-icons": "^4.2.0",
     "react-moment": "^1.1.1",
     "react-query": "^3.19.0",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0",
     "sass": "^1.35.2",
     "swiper": "^6.7.5"
   }
