@@ -1,0 +1,16 @@
+.profileArea {
+    padding: 20px;
+    .first {
+        display: flex;
+        align-items: center;
+        h2 {
+            margin-left: 10px;
+            margin-bottom: 0;
+        }
+        margin-bottom: 20px;
+    }
+}
+.uploadArea { 
+    text-align: center;
+    padding: 20px;
+}

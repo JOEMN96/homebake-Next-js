@@ -6,10 +6,10 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { Avatar } from "antd";
 import { Drawer, Button } from "antd";
 import styles from "../styles/Navbar.module.scss";
+import { connect } from "react-redux";
 
 class Navbar extends React.Component {
   state = { visible: false, placement: "left" };
-
   showDrawer = () => {
     this.setState({
       visible: true,
@@ -119,10 +119,13 @@ class Navbar extends React.Component {
             </ul>
 
             <ul className="userRelated">
-              <li>
+              <li style={{ position: "relative" }}>
                 <Link className="cart" href="/Cart">
                   <a>
                     <BsBag size={26} />
+                    <span className={styles.cartLen}>
+                      {this.props.cart.length}
+                    </span>
                   </a>
                 </Link>
               </li>
@@ -146,4 +149,6 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({ cart: state.cart.items });
+
+export default connect(mapStateToProps, null)(Navbar);

@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
+import { Row, Col } from "antd";
+import styles from "../styles/Profile.module.scss";
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 
 function Profile({ data }) {
   const [profile, setProfile] = useState(undefined);
@@ -9,13 +13,34 @@ function Profile({ data }) {
     const res = await axios.get("logout");
     router.push("/");
   };
-  console.log(data);
 
   return (
     <section>
-      <h2>Hi, {data.name} Welcome Back</h2>
-      <p>Email: {data.email}</p>
-      <button onClick={handleLogout}> LogOut </button>
+      <Row>
+        <Col
+          xs={24}
+          sm={12}
+          className={styles.profileArea}
+          md={12}
+          lg={12}
+          xl={12}
+        >
+          <div className={styles.first}>
+            <Avatar size="large" icon={<UserOutlined />} />
+            <h2>Hi, Welcome Back {data.name} !</h2>
+          </div>
+          <p>Email: {data.email}</p>
+          <button onClick={handleLogout}> LogOut </button>
+        </Col>
+        <Col
+          xs={24}
+          sm={12}
+          md={12}
+          className={styles.uploadArea}
+          lg={12}
+          xl={12}
+        ></Col>
+      </Row>
     </section>
   );
 }

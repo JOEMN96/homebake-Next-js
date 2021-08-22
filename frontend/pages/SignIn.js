@@ -23,7 +23,6 @@ function SignIn() {
   const onFinish = async (values) => {
     const val = { ...values };
 
-    console.log("values", val);
     setErrors([]);
     try {
       const res = await axios.post("/signIn", val);
@@ -34,9 +33,9 @@ function SignIn() {
         router.push("/Profile");
       }
     } catch (error) {
-      if (error.response.status === 401) {
+      if (error.response?.status === 401) {
         setErrors([{ msg: error.response.data.err }]);
-      } else if (error.response.status === 400) {
+      } else if (error.response?.status === 400) {
         setErrors([{ msg: error.response.data.errors[0].msg }]);
       }
     }

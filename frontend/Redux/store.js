@@ -8,10 +8,11 @@ let initaialState = {
   user: null,
 };
 
-// const rootReducer = combineReducers((state = {}, action) => {
-//   return state;
-// });
+const rootReducer = combineReducers({
+  cart,
+  user,
+});
 
-const store = createStore(user, initaialState, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;

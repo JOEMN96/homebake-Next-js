@@ -5,11 +5,8 @@ import BlogsCard from "../components/Home/BlogsCard";
 import axios from "../helpers/Axios";
 import { Row, Col } from "antd";
 import SurprisepackCard from "../components/Home/SurprisepackCard";
-import { useSelector } from "react-redux";
 
 export default function Home({ trending }) {
-  const state = useSelector((state) => state);
-  console.log(state);
   try {
     const { blogs, cakes, surprise_packs } = trending[0];
     return (
