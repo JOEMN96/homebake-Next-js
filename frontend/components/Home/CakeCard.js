@@ -4,7 +4,11 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../../Redux/Actions/Cart";
+import {
+  addToCart,
+  removeFromCart,
+  saveToLocalStorage,
+} from "../../Redux/Actions/Cart";
 
 const MyButton = React.forwardRef(({ onClick, href }, ref) => {
   return (
@@ -36,8 +40,10 @@ function CakeCard({ cake }) {
     setAddedTOCart(!addedToCart);
     if (addedToCart) {
       dispatch(removeFromCart({ id }));
+      dispatch(saveToLocalStorage());
     } else {
       dispatch(addToCart({ title, price, image: images[0].url, id }));
+      dispatch(saveToLocalStorage());
     }
   };
 

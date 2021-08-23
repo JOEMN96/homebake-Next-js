@@ -3,11 +3,6 @@ import user from "./reducers/userReducer";
 import cart from "./reducers/cartReducer";
 import thunk from "redux-thunk";
 
-let initaialState = {
-  cart: null,
-  user: null,
-};
-
 const rootReducer = combineReducers({
   cart,
   user,
