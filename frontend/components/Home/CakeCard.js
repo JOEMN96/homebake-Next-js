@@ -42,7 +42,7 @@ function CakeCard({ cake }) {
       dispatch(removeFromCart({ id }));
       dispatch(saveToLocalStorage());
     } else {
-      dispatch(addToCart({ title, price, image: images[0].url, id }));
+      dispatch(addToCart({ title, price, image: images[0].url, id, count: 0 }));
       dispatch(saveToLocalStorage());
     }
   };

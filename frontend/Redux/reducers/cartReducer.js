@@ -2,6 +2,8 @@ let initaialState = {
   items: [],
 };
 const reducer = (state = initaialState, action) => {
+  console.log(action);
+
   switch (action.type) {
     case "ADD_TO_CART":
       return state.items.length > 0
@@ -17,6 +19,8 @@ const reducer = (state = initaialState, action) => {
     case "SAVE_TO_LOCAL_STORAGE":
       if (state.items.length > 0) {
         localStorage.setItem("cart", JSON.stringify(state.items));
+      } else {
+        localStorage.setItem("cart", JSON.stringify([]));
       }
       return {
         ...state,

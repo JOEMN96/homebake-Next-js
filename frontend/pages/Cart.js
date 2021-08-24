@@ -1,9 +1,20 @@
 import styles from "../styles/Cart.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { GrClose } from "react-icons/Gr";
+import { removeFromCart, saveToLocalStorage } from "../Redux/Actions/Cart";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.items);
-  console.log(cart);
+  const dispatch = useDispatch();
+
+  const handleRemoveFromCart = (item) => {
+    dispatch(removeFromCart(item));
+
+    setInterval(() => {
+      dispatch(saveToLocalStorage());
+    }, 2000);
+  };
 
   if (!cart.length > 0) {
     return (
@@ -17,9 +28,52 @@ function Cart() {
   }
 
   return (
-    <div>
-      <h1>Cart</h1>
-    </div>
+    <section className={styles.cart}>
+      <div className={styles.cartHeader}>
+        <h2>Your Order From</h2>
+        <img src="/images/logo.png" alt="cakespot logo" />
+      </div>
+      <div className={styles.wrapper}>
+        {cart.map((item) => {
+          return (
+            <div key={item.id} className={styles.item}>
+              <img src={item.image} alt={item.title} />
+              <h3 className={styles.title}>{item.title}</h3>
+              <div className={styles.countArea}>
+                <AiOutlinePlus />
+                <span className={styles.itemNos}>1</span>
+                <AiOutlineMinus />
+              </div>
+              <p className={styles.price}>
+                <span>₹ </span>
+                {item.price}
+              </p>
+              <GrClose onClick={() => handleRemoveFromCart(item)} />
+            </div>
+          );
+        })}
+        <div className={styles.subtotal}>
+          <div>
+            <h3>Subtotal</h3>
+            <h3>
+              <span>₹ </span> 200
+            </h3>
+          </div>
+          <div>
+            <h3>Shipping</h3>
+            <h3>
+              <span>₹ </span> N/A
+            </h3>
+          </div>
+          <div>
+            <h3>Total</h3>
+            <h3>
+              <span>₹ </span> 200
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

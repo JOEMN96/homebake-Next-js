@@ -10,3 +10,108 @@
     }
         
 }
+
+.cartHeader {
+    max-width: 420px;
+    text-align: center;
+    margin: 0 auto;
+    img {
+        height: 80px;
+    }
+}
+
+.cart {
+    margin-top:5%;
+    .wrapper {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        border-radius: 5px;
+        padding: 15px;
+        max-width: 430px;
+        margin: 0 auto;
+    }
+    .item {
+
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        h3 {
+            width: 95px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .countArea {
+            margin-left: 10px;
+            svg {
+                color: #979797;
+                margin: 0px 10px;
+                cursor: pointer;
+            }
+            .itemNos {
+                border: 1px solid #979797;
+                border-radius: 3px;
+                padding: 1px 8px;
+                opacity: 0.5;
+                font-size: 16px;
+            }           
+        }
+        p {
+            margin-bottom:0 ;
+            font-weight: bold;
+            font-size: 17px;
+            span {
+                font-family: cursive;
+            }
+        }
+
+        & > svg {
+            margin-left: 20px;
+            background: rgba(36, 46, 76, 0.05);
+            padding: 7px;
+            font-size: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+}
+
+.subtotal {
+    background: #F4F4F6;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 30px;
+    > div {
+        display: flex;
+        justify-content: space-between;
+    }
+    h3 {
+        margin-bottom: 4px;
+        span {
+            font-family: cursive;
+        }
+    }
+}
+
+@media  (max-width: 420px) {
+    .title {
+        font-size: 13px;
+    }
+    .price {
+        font-size: 13px !important;
+
+    }
+    .countArea {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        span {
+            margin: 5px 0;
+        }
+    }
+  
+}
