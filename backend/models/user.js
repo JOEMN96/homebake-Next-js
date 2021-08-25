@@ -35,7 +35,7 @@ const USER = new Schema(
         title: String,
         price: Number,
         id: String,
-        count: Number,
+        quantity: Number,
         image: String,
       },
     ],
