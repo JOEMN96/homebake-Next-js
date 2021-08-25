@@ -10,10 +10,7 @@ function Cart() {
 
   const handleRemoveFromCart = (item) => {
     dispatch(removeFromCart(item));
-
-    setInterval(() => {
-      dispatch(saveToLocalStorage());
-    }, 2000);
+    dispatch(saveToLocalStorage());
   };
 
   if (!cart.length > 0) {

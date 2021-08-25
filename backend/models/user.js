@@ -32,9 +32,11 @@ const USER = new Schema(
     },
     cart: [
       {
-        name: String,
+        title: String,
         price: Number,
-        id: Number,
+        id: String,
+        count: Number,
+        image: String,
       },
     ],
     avatar: {

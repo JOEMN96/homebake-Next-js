@@ -1,8 +1,10 @@
 import express from "express";
-import userRouter from "./routes/user";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+
+import userRouter from "./routes/user";
+import cartRouter from "./routes/cart";
 
 const app = express();
 mongoose.connect(
@@ -44,6 +46,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(userRouter);
+app.use(cartRouter);
 
 app.use((req, res) => {
   res.status(404).send();
