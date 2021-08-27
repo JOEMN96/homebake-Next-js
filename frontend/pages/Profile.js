@@ -5,12 +5,18 @@ import { Row, Col } from "antd";
 import styles from "../styles/Profile.module.scss";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { loadLocalStorage } from "../Redux/Actions/Cart";
+import { isUserLoggedIn } from "../Redux/Actions/User";
 
 function Profile({ data }) {
   const [profile, setProfile] = useState(undefined);
+  const dispatch = useDispatch();
   const router = useRouter();
   const handleLogout = async () => {
     const res = await axios.get("logout");
+    dispatch(loadLocalStorage());
+    dispatch(isUserLoggedIn());
     router.push("/");
   };
 

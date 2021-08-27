@@ -59,3 +59,7 @@ export const removeItemFromCart = async (req, res) => {
     return res.status(404).send({ msg: "Something Went Wrong" });
   }
 };
+
+export const cart = async (req, res) => {
+  res.status(200).send(req.user.cart);
+};

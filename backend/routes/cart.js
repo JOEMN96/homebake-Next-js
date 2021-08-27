@@ -1,10 +1,11 @@
 import { auth } from "../middlewares/auth";
 import { Router } from "express";
-import { addItemToCart, removeItemFromCart } from "../controllers/cart";
+import { addItemToCart, removeItemFromCart, cart } from "../controllers/cart";
 
 const router = Router();
 
 router.post("/addItem", auth, addItemToCart);
 router.post("/removeItem", auth, removeItemFromCart);
+router.get("/cart", auth, cart);
 
 export default router;

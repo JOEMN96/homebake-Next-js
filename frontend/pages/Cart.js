@@ -3,15 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { GrClose } from "react-icons/Gr";
 import { removeFromCart, saveToLocalStorage } from "../Redux/Actions/Cart";
+import { useEffect, useState } from "react";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.items);
+  const cart2 = useSelector((state) => state);
+  const [state, setstate] = useState([]);
   const dispatch = useDispatch();
-
+  console.log(cart2);
+  useEffect(() => {
+    setstate(cart);
+  }, []);
   const handleRemoveFromCart = (item) => {
     dispatch(removeFromCart(item));
     dispatch(saveToLocalStorage());
   };
+
+  if (!cart) {
+    return <h1>Loading</h1>;
+  }
 
   if (!cart.length > 0) {
     return (

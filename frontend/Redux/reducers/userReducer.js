@@ -4,8 +4,8 @@ let initaialState = {
 
 const reducer = (state = initaialState, action) => {
   switch (action.type) {
-    case "TICK":
-      return { ...state, tick: action.payload };
+    case "IS_USER_AUTHENTICATED":
+      return { ...state, user: action.payload };
     default:
       return state;
   }

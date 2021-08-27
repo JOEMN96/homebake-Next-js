@@ -13,12 +13,15 @@ import ButtonLoading from "../components/Login/ButtonWithLoading";
 import { useState } from "react";
 import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { loadCart } from "../Redux/Actions/Cart";
 
 function SignIn() {
   const [button, setButton] = useState(false);
   const [errors, setErrors] = useState([]);
   const [done, setDone] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onFinish = async (values) => {
     const val = { ...values };
@@ -29,7 +32,7 @@ function SignIn() {
       if (res.status === 200) {
         setButton(false);
         setDone(true);
-        console.log("fird");
+        dispatch(loadCart(1));
         router.push("/Profile");
       }
     } catch (error) {

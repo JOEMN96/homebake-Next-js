@@ -74,7 +74,10 @@ function CakeCard({ cake }) {
 
         <div className="flex">
           <div>
-            <p>₹ {price}</p>
+            <p>
+              <span style={{ fontFamily: "cursive" }}>₹ </span>
+              {price}
+            </p>
           </div>
           <div onClick={() => handleCart(addedToCart)}>
             <a className="addToCart">
