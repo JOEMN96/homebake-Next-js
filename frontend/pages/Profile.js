@@ -6,8 +6,8 @@ import styles from "../styles/Profile.module.scss";
 import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { loadLocalStorage } from "../Redux/Actions/Cart";
 import { isUserLoggedIn } from "../Redux/Actions/User";
+import { setUpLocalStorage } from "../Redux/Actions/Cart";
 
 function Profile({ data }) {
   const [profile, setProfile] = useState(undefined);
@@ -15,8 +15,8 @@ function Profile({ data }) {
   const router = useRouter();
   const handleLogout = async () => {
     const res = await axios.get("logout");
-    dispatch(loadLocalStorage());
     dispatch(isUserLoggedIn());
+    dispatch(setUpLocalStorage("GET_FORM_LOCAL_STORAGE", null));
     router.push("/");
   };
 

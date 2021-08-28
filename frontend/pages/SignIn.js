@@ -15,6 +15,7 @@ import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { loadCart } from "../Redux/Actions/Cart";
+import { isUserLoggedIn } from "../Redux/Actions/User";
 
 function SignIn() {
   const [button, setButton] = useState(false);
@@ -33,6 +34,7 @@ function SignIn() {
         setButton(false);
         setDone(true);
         dispatch(loadCart());
+        dispatch(isUserLoggedIn());
         router.push("/Profile");
       }
     } catch (error) {

@@ -4,7 +4,11 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../../Redux/Actions/Cart";
+import {
+  addToCart,
+  removeFromCart,
+  setUpLocalStorage,
+} from "../../Redux/Actions/Cart";
 
 const MyButton = React.forwardRef(({ onClick, href }, ref) => {
   return (
@@ -22,8 +26,8 @@ const MyButton = React.forwardRef(({ onClick, href }, ref) => {
 function CakeCard({ cake }) {
   const { title, price, images, id } = cake;
   const [addedToCart, setAddedTOCart] = useState(false);
-  const cart = useSelector((state) => state.cart.items);
-  const alreadyInCart = cart.find((item) => item.id == id);
+  const state = useSelector((state) => state);
+  const alreadyInCart = state.cart.items.find((item) => item.id == id);
   const dispatch = useDispatch();
   useEffect(() => {
     if (alreadyInCart) {
@@ -33,6 +37,13 @@ function CakeCard({ cake }) {
 
   const handleCart = () => {
     setAddedTOCart(!addedToCart);
+    if (addedToCart && !state.user.user) {
+      dispatch(setUpLocalStorage("REMOVE_FROM_LOCAL_CART", cake));
+      return dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", cake));
+    } else if (!addedToCart && !state.user.user) {
+      dispatch(setUpLocalStorage("ADD_TO_LOCAL_CART", cake));
+      return dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", cake));
+    }
     if (addedToCart) {
       dispatch(removeFromCart({ id }));
     } else {

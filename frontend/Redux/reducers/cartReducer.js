@@ -2,7 +2,6 @@ let initaialState = {
   items: [],
 };
 const reducer = (state = initaialState, action) => {
-  // console.log(action);
   switch (action.type) {
     case "ADD_TO_CART":
       return state.items.length > 0
@@ -34,7 +33,6 @@ const reducer = (state = initaialState, action) => {
       };
 
     case "CART_SERVER_ERROR":
-      console.log(action);
       return {
         ...state,
         items: [],
@@ -61,6 +59,23 @@ const reducer = (state = initaialState, action) => {
             ...state,
             items: [],
           };
+
+    case "REMOVE_FROM_LOCAL_CART":
+      return {
+        ...state,
+        items: state.items.filter((item) => item.id !== action.payload.id),
+      };
+
+    case "STOP_LOADING_LOCAL_STORAGE":
+      return {
+        ...state,
+        items: [],
+      };
+
+    case "ADD_TO_LOCAL_CART":
+      return state.items.length > 0
+        ? { ...state, items: [...state.items, action.payload] }
+        : { ...state, items: [action.payload] };
 
     default:
       return state;

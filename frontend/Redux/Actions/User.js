@@ -1,5 +1,5 @@
 import axios from "../../helpers/backendAxios";
-import { loadCart, loadLocalStorage } from "./Cart";
+import { loadCart } from "./Cart";
 
 export const isUserLoggedIn = () => {
   return async (dispatch) => {
@@ -11,7 +11,6 @@ export const isUserLoggedIn = () => {
       }
     } catch (error) {
       dispatch({ type: "IS_USER_AUTHENTICATED", payload: false });
-      dispatch(loadLocalStorage());
     }
   };
 };

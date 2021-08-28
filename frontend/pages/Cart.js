@@ -2,22 +2,22 @@ import styles from "../styles/Cart.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { GrClose } from "react-icons/Gr";
-import { removeFromCart, saveToLocalStorage } from "../Redux/Actions/Cart";
+import { removeFromCart, setUpLocalStorage } from "../Redux/Actions/Cart";
 
 function Cart() {
-  const cart = useSelector((state) => state.cart.items);
+  const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (item) => {
-    dispatch(removeFromCart(item));
-    dispatch(saveToLocalStorage());
+    if (state.user.user) {
+      dispatch(removeFromCart(item));
+    } else {
+      dispatch(setUpLocalStorage("REMOVE_FROM_LOCAL_CART", item));
+      return dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", item));
+    }
   };
 
-  if (!cart) {
-    return <h1>Loading</h1>;
-  }
-
-  if (!cart.length > 0) {
+  if (!state.cart.items.length > 0) {
     return (
       <>
         <div className={styles.svg}>
@@ -35,10 +35,10 @@ function Cart() {
         <img src="/images/logo.png" alt="cakespot logo" />
       </div>
       <div className={styles.wrapper}>
-        {cart.map((item, index) => {
+        {state.cart.items.map((item, index) => {
           return (
             <div key={index} className={styles.item}>
-              <img src={item.image} alt={item.title} />
+              <img src={item.image || item.images[0].url} alt={item.title} />
               <h3 className={styles.title}>{item.title}</h3>
               <div className={styles.countArea}>
                 <AiOutlinePlus />
