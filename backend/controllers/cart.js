@@ -15,11 +15,11 @@ export const addItemToCart = async (req, res) => {
       };
       const doc = await User.findOneAndUpdate(query, action);
       if (!doc) return res.status(400).send({ msg: "Something went Wrong" });
-      return res.status(200).send({ msg: "updated" });
+      return res.status(200).send({ items: [...doc.cart] });
     } else {
       USER.cart.push({ id, image, price, title, quantity });
       await USER.save();
-      return res.status(201).send({ msg: "added" });
+      return res.status(201).send({ items: [...USER.cart] });
     }
   } catch (e) {
     res.status(404).send(e);
@@ -35,7 +35,7 @@ export const removeItemFromCart = async (req, res) => {
     if (removeAll) {
       user.cart = user.cart.filter((item) => item.id !== removalItem.id);
       await user.save();
-      return res.status(200).send({ msg: "All items are Removed" });
+      return res.status(200).send({ items: [...user.cart] });
     }
     const query = {
       _id: user._id,
@@ -48,11 +48,11 @@ export const removeItemFromCart = async (req, res) => {
     if (removalItem.quantity > 1) {
       const user = await User.findOneAndUpdate(query, action);
       await user.save();
-      return res.status(200).send({ msg: "removed" });
+      return res.status(200).send({ items: [...user.cart] });
     } else {
       user.cart = user.cart.filter((item) => item.id !== id);
       await user.save();
-      return res.status(200).send({ msg: "Removed" });
+      return res.status(200).send({ items: [...user.cart] });
     }
   } catch (error) {
     console.log(error.message);

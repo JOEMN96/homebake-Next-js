@@ -1,16 +1,31 @@
 import axios from "../../helpers/backendAxios";
 
 export const addToCart = (item) => {
-  return {
-    type: "ADD_TO_CART",
-    payload: item,
+  return async (dispatch) => {
+    try {
+      const res = await axios.post("addItem", item);
+      console.log(res.data);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "CART_SERVER_ERROR",
+        payload: item,
+      });
+    }
   };
 };
 
 export const removeFromCart = (item) => {
-  return {
-    type: "REMOVE_FROM_CART",
-    payload: item,
+  return async (dispatch) => {
+    const res = await axios.post("removeItem", { id: item.id });
+    console.log(res.data);
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: res.data,
+    });
   };
 };
 
@@ -28,14 +43,13 @@ export const loadLocalStorage = () => {
   };
 };
 
-export const loadCart = (val) => {
+const editLocalStorage = (cartAction) => {};
+
+export const loadCart = () => {
   return async (dispatch) => {
-    if (val) {
-      dispatch({ type: "IS_USER_AUTHENTICATED", payload: true });
-    }
     try {
       const res = await axios.get("/cart");
-      dispatch({ type: "LOAD_CART", payload: res.data });
+      dispatch({ type: "LOAD_INITIAL_CART", payload: res.data });
     } catch (error) {
       dispatch({ type: "IS_USER_AUTHENTICATED", payload: false });
     }

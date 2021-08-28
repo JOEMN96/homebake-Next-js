@@ -3,17 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { GrClose } from "react-icons/Gr";
 import { removeFromCart, saveToLocalStorage } from "../Redux/Actions/Cart";
-import { useEffect, useState } from "react";
 
 function Cart() {
   const cart = useSelector((state) => state.cart.items);
-  const cart2 = useSelector((state) => state);
-  const [state, setstate] = useState([]);
   const dispatch = useDispatch();
-  console.log(cart2);
-  useEffect(() => {
-    setstate(cart);
-  }, []);
+
   const handleRemoveFromCart = (item) => {
     dispatch(removeFromCart(item));
     dispatch(saveToLocalStorage());
@@ -41,9 +35,9 @@ function Cart() {
         <img src="/images/logo.png" alt="cakespot logo" />
       </div>
       <div className={styles.wrapper}>
-        {cart.map((item) => {
+        {cart.map((item, index) => {
           return (
-            <div key={item.id} className={styles.item}>
+            <div key={index} className={styles.item}>
               <img src={item.image} alt={item.title} />
               <h3 className={styles.title}>{item.title}</h3>
               <div className={styles.countArea}>

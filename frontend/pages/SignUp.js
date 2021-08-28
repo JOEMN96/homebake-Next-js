@@ -14,6 +14,8 @@ import ButtonLoading from "../components/Login/ButtonWithLoading";
 import { useState } from "react";
 import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { loadCart } from "../Redux/Actions/Cart";
 
 function SignUp() {
   const [button, setButton] = useState(false);
@@ -23,6 +25,8 @@ function SignUp() {
 
   const onFinish = async (values) => {
     const val = { ...values };
+    const dispatch = useDispatch();
+
     setErrors([]);
     try {
       const res = await axios.post("/signUp", val);
@@ -30,13 +34,12 @@ function SignUp() {
       if (res.status === 201) {
         setButton(false);
         setDone(true);
-        console.log("fird");
+        dispatch(loadCart());
         router.push("/Profile");
       }
       console.log(res);
     } catch (error) {
       if (error.response?.status == 400) {
-        console.log(error.response.data.msg);
         setDone(false);
         return setErrors(
           error.response.data.errors || [{ msg: error.response.data.msg }]

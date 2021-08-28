@@ -32,7 +32,7 @@ function SignIn() {
       if (res.status === 200) {
         setButton(false);
         setDone(true);
-        dispatch(loadCart(1));
+        dispatch(loadCart());
         router.push("/Profile");
       }
     } catch (error) {
