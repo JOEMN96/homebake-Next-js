@@ -1,4 +1,5 @@
 import axios from "../../helpers/Axios";
+import backeendAxios from "../../helpers/backendAxios";
 import { useState } from "react";
 import { Row, Col } from "antd";
 import "swiper/swiper.min.css";
@@ -9,12 +10,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Head from "next/head";
 import { Radio } from "antd";
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
+import { useRouter } from "next/router";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs]);
 
 function Cake({ cake }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [buyNowError, setbuyNowError] = useState("Buy Now");
+  const router = useRouter();
   const {
     description,
     images,
@@ -24,8 +28,10 @@ function Cake({ cake }) {
     size,
     EggOReggless,
     shape,
+    id,
   } = cake;
-  console.log(cake);
+
+  const token = process.env.STRIPE_PUBLISH_KEY;
 
   const handleChecked = (e) => {
     console.log("radio checked", e.target.value);
@@ -33,6 +39,22 @@ function Cake({ cake }) {
   const handleShape = (e) => {
     console.log("radio checked", e.target.value);
   };
+
+  const handleBuynow = async () => {
+    try {
+      setbuyNowError("Loading ...");
+      const res = await backeendAxios.post("checkoutSingleItem", {
+        id,
+        itemType: "cakes",
+      });
+      console.log(res);
+      router.push(res.data.url);
+    } catch (error) {
+      setbuyNowError("Something Went Wrong");
+      console.log(error.message);
+    }
+  };
+
   return (
     <section className={styles.cakePage}>
       <Head>
@@ -97,7 +119,7 @@ function Cake({ cake }) {
         <Col className={styles.col2} xs={24} sm={24} md={8} lg={12} xl={12}>
           <h1>{title}</h1>
           <h3>
-            ₹ {price}{" "}
+            ₹ {price}
             {offer && <span className={styles.offer}>{"-" + offer}</span>}
           </h3>
           <div className={styles.sizes}>
@@ -128,13 +150,15 @@ function Cake({ cake }) {
                 onChange={handleShape}
                 buttonStyle="solid"
               >
-                {shape.map((sz) => (
-                  <Radio.Button value={sz.Shape}>{sz.Shape}</Radio.Button>
+                {shape.map((sz, index) => (
+                  <Radio.Button key={index} value={sz.Shape}>
+                    {sz.Shape}
+                  </Radio.Button>
                 ))}
               </Radio.Group>
             )}
           </div>
-          <button>Buy Now</button>
+          <button onClick={handleBuynow}>{buyNowError}</button>
         </Col>
       </Row>
       <style jsx>{``}</style>

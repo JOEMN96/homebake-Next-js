@@ -2,9 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import dotenv from "dotenv";
 
 import userRouter from "./routes/user";
 import cartRouter from "./routes/cart";
+import paymentRoutes from "./routes/payment";
+dotenv.config();
 
 const app = express();
 mongoose.connect(
@@ -49,6 +52,7 @@ app.get("/", (req, res) => {
 
 app.use(userRouter);
 app.use(cartRouter);
+app.use(paymentRoutes);
 
 app.use((req, res) => {
   res.status(404).send();
