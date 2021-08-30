@@ -17,7 +17,7 @@ SwiperCore.use([Navigation, Thumbs]);
 
 function Cake({ cake }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [buyNowError, setbuyNowError] = useState("Buy Now");
+  const [buyNowError, setbuyNowError] = useState(null);
   const router = useRouter();
   const {
     description,
@@ -47,7 +47,6 @@ function Cake({ cake }) {
         id,
         itemType: "cakes",
       });
-      console.log(res);
       router.push(res.data.url);
     } catch (error) {
       setbuyNowError("Something Went Wrong");
@@ -158,7 +157,8 @@ function Cake({ cake }) {
               </Radio.Group>
             )}
           </div>
-          <button onClick={handleBuynow}>{buyNowError}</button>
+          <button onClick={handleBuynow}>Buy Now</button>
+          <p> {buyNowError ? buyNowError : ""} </p>
         </Col>
       </Row>
       <style jsx>{``}</style>

@@ -3,9 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { GrClose } from "react-icons/Gr";
 import { removeFromCart, setUpLocalStorage } from "../Redux/Actions/Cart";
+import backendAxios from "../helpers/backendAxios";
+import { useState } from "react";
+import router from "next/router";
 
 function Cart() {
   const state = useSelector((state) => state);
+  const [buyNowError, setbuyNowError] = useState(null);
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (item) => {
@@ -14,6 +18,17 @@ function Cart() {
     } else {
       dispatch(setUpLocalStorage("REMOVE_FROM_LOCAL_CART", item));
       return dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", item));
+    }
+  };
+
+  const handleCheckout = async () => {
+    try {
+      setbuyNowError("Loading ...");
+      const res = await backendAxios.post("checkoutCart", {});
+      router.push(res.data.url);
+    } catch (error) {
+      setbuyNowError("Something Went Wrong");
+      console.log(error.message);
     }
   };
 
@@ -72,6 +87,10 @@ function Cart() {
               <span>₹ </span> 200
             </h3>
           </div>
+        </div>
+        <div className={styles.checkout}>
+          <button onClick={handleCheckout}>Checkout</button>
+          <p>{buyNowError ? buyNowError : ""}</p>
         </div>
       </div>
     </section>
