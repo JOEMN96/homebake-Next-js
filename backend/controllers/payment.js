@@ -14,6 +14,10 @@ export const checkoutSingleItem = async (req, res) => {
     const { data } = await axios.get(`${itemType}/${id}`);
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
+      shipping_rates: ["shr_1JUZhVKvrwBJvfpSi3ZgbH17"],
+      shipping_address_collection: {
+        allowed_countries: ["IN"],
+      },
       line_items: [
         {
           price_data: {
@@ -23,6 +27,7 @@ export const checkoutSingleItem = async (req, res) => {
             },
             unit_amount: data.price * 100,
           },
+          tax_rates: ["txr_1JUZrjKvrwBJvfpSkV6BpEYE"],
           quantity: 1,
         },
       ],
@@ -61,6 +66,7 @@ export const checkoutCart = async (req, res) => {
           },
           unit_amount: item.price * 100,
         },
+        tax_rates: ["txr_1JUZrjKvrwBJvfpSkV6BpEYE"],
         quantity: currentItem.quantity ? currentItem.quantity : 1,
       };
     });
@@ -68,10 +74,16 @@ export const checkoutCart = async (req, res) => {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: paymentIntend,
+      shipping_rates: ["shr_1JUZhVKvrwBJvfpSi3ZgbH17"],
+      shipping_address_collection: {
+        allowed_countries: ["IN"],
+      },
       mode: "payment",
       success_url: process.env.DOMAIN + "Sucess",
       cancel_url: process.env.FAILURE_URL + `Cart`,
     });
+    req.user.cart = [];
+    await req.user.save();
     res.status(200).send({ url: session.url });
   } catch (error) {
     res.status(404).send(error);

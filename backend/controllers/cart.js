@@ -63,3 +63,13 @@ export const removeItemFromCart = async (req, res) => {
 export const cart = async (req, res) => {
   res.status(200).send(req.user.cart);
 };
+
+export const clearCart = async (req, res) => {
+  try {
+    req.user.cart = [];
+    await req.user.save();
+    res.status(200).send();
+  } catch (error) {
+    res.status(400).send();
+  }
+};

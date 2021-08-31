@@ -1,0 +1,21 @@
+.sucess {
+    h3 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    div {
+        text-align: center;
+        a {
+            padding: 4px 10px;
+            background: #49A159;
+            color: white;
+            border-radius: 3px;
+            margin-top: 10px;
+            display: inline-block;
+            &:hover {
+                color: black !important;
+            }
+        }
+    }
+}
