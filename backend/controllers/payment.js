@@ -1,6 +1,8 @@
 import Stripe from "stripe";
 import axios from "../helpers/axios";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer";
+
 dotenv.config();
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
@@ -35,6 +37,25 @@ export const checkoutSingleItem = async (req, res) => {
       success_url: process.env.DOMAIN + "Sucess",
       cancel_url: process.env.FAILURE_URL + `Cake/${id}`,
     });
+
+    var transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      auth: {
+        user: process.env.EMAIL_ID,
+        pass: process.env.PW,
+      },
+    });
+
+    var mailOptions = {
+      from: process.env.EMAIL_ID,
+      to: req.user.email,
+      subject: "Sending Email using Node.js",
+      text: "That was easy!",
+    };
+
+    // const mailRes = await transporter.sendMail(mailOptions);
+
+    // console.log(mailRes);
 
     res.status(200).send({ url: session.url });
   } catch (e) {
