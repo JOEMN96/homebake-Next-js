@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import axios from "../helpers/backendAxios";
 import styles from "../styles/Sucess.module.scss";
 import Link from "next/link";
@@ -11,6 +10,9 @@ function Sucess() {
       <h3>
         Your Order is Sucessfully completed, You will receive a call from Our
         side Shortly !
+      </h3>
+      <h3>
+        If you didn't receive a call from our side Please call as @ 9087531393
       </h3>
       <div>
         <Link href="/">

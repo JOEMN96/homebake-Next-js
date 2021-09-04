@@ -2,10 +2,12 @@ import Stripe from "stripe";
 import axios from "../helpers/axios";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
+import sgMail from "@sendgrid/mail";
 
 dotenv.config();
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const checkoutSingleItem = async (req, res) => {
   try {
@@ -37,25 +39,36 @@ export const checkoutSingleItem = async (req, res) => {
       success_url: process.env.DOMAIN + "Sucess",
       cancel_url: process.env.FAILURE_URL + `Cake/${id}`,
     });
+    // ? Old Node Mailer Code
 
-    var transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      auth: {
-        user: process.env.EMAIL_ID,
-        pass: process.env.PW,
-      },
-    });
+    // var transporter = nodemailer.createTransport({
+    //   host: "smtp.gmail.com",
+    //   auth: {
+    //     user: process.env.EMAIL_ID,
+    //     pass: process.env.PW,
+    //   },
+    // });
 
-    var mailOptions = {
-      from: process.env.EMAIL_ID,
-      to: req.user.email,
-      subject: "Sending Email using Node.js",
-      text: "That was easy!",
+    // var mailOptions = {
+    //   from: process.env.EMAIL_ID,
+    //   to: req.user.email,
+    //   subject: "Sending Email using Node.js",
+    //   text: "That was easy!",
+    // };
+    // const mailRes = await transporter.sendMail(mailOptions);
+    // console.log(mailRes);
+
+    const msg = {
+      to: "aruljoe38@gmail.com",
+      from: "aruljoe37@gmail.com", // Change to your verified sender
+      subject: "Order Sucess - CakeSpot",
+      text: `Hey ${req.user.name}, Your order for Rs.${
+        session.amount_total / 100
+      } is Sucessfull.`,
+      // html: "<strong>and easy to do anywhere, even with Node.js</strong>",
     };
 
-    // const mailRes = await transporter.sendMail(mailOptions);
-
-    // console.log(mailRes);
+    await sgMail.send(msg);
 
     res.status(200).send({ url: session.url });
   } catch (e) {
