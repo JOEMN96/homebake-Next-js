@@ -1,8 +1,8 @@
 import Stripe from "stripe";
 import axios from "../helpers/axios";
 import dotenv from "dotenv";
-import nodemailer from "nodemailer";
 import sgMail from "@sendgrid/mail";
+// import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -16,18 +16,21 @@ export const checkoutSingleItem = async (req, res) => {
       return res.status(400).send();
     }
     const { data } = await axios.get(`${itemType}/${id}`);
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       shipping_rates: ["shr_1JUZhVKvrwBJvfpSi3ZgbH17"],
       shipping_address_collection: {
         allowed_countries: ["IN"],
       },
+      customer_email: req.user.email,
       line_items: [
         {
           price_data: {
             currency: "inr",
             product_data: {
               name: data.title,
+              images: [data.images[0].url],
             },
             unit_amount: data.price * 100,
           },
@@ -39,6 +42,7 @@ export const checkoutSingleItem = async (req, res) => {
       success_url: process.env.DOMAIN + "Sucess",
       cancel_url: process.env.FAILURE_URL + `Cake/${id}`,
     });
+
     // ? Old Node Mailer Code
 
     // var transporter = nodemailer.createTransport({
@@ -59,8 +63,8 @@ export const checkoutSingleItem = async (req, res) => {
     // console.log(mailRes);
 
     const msg = {
-      to: "aruljoe38@gmail.com",
-      from: "aruljoe37@gmail.com", // Change to your verified sender
+      to: process.env.EMAIL_ID,
+      from: "aruljoe37@gmail.com",
       subject: "Order Sucess - CakeSpot",
       text: `Hey ${req.user.name}, Your order for Rs.${
         session.amount_total / 100
@@ -68,8 +72,9 @@ export const checkoutSingleItem = async (req, res) => {
       // html: "<strong>and easy to do anywhere, even with Node.js</strong>",
     };
 
-    await sgMail.send(msg);
-
+    if (session.payment_status == "paid") {
+      await sgMail.send(msg);
+    }
     res.status(200).send({ url: session.url });
   } catch (e) {
     console.log(e.message);
@@ -97,6 +102,7 @@ export const checkoutCart = async (req, res) => {
           currency: "inr",
           product_data: {
             name: item.title,
+            images: [currentItem.image],
           },
           unit_amount: item.price * 100,
         },
@@ -116,10 +122,10 @@ export const checkoutCart = async (req, res) => {
       success_url: process.env.DOMAIN + "Sucess",
       cancel_url: process.env.FAILURE_URL + `Cart`,
     });
-    req.user.cart = [];
-    await req.user.save();
+
     res.status(200).send({ url: session.url });
   } catch (error) {
+    console.log(error);
     res.status(404).send(error);
   }
 

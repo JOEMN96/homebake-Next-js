@@ -19,6 +19,7 @@
 - FAILURE_URL = "http://localhost:3000/"
 - EMAIL_ID 
 - PW 
+- SENDGRID_API_KEY
 
 #### CMS
 

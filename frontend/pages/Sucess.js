@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import axios from "../helpers/backendAxios";
 import styles from "../styles/Sucess.module.scss";
 import Link from "next/link";
 
 function Sucess() {
+  useEffect(async () => {
+    const res = await axios.delete("/clearCart", {});
+  }, []);
+
   return (
     <section className={styles.sucess}>
       <section className="contactPageHeader"></section>
