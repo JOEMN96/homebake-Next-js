@@ -2,7 +2,14 @@ import styles from "../../styles/SurprisePacks.module.scss";
 import Link from "next/link";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { RiShoppingCartLine } from "react-icons/ri";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  removeFromCart,
+  setUpLocalStorage,
+} from "../../Redux/Actions/Cart";
+import { MdRemoveShoppingCart } from "react-icons/md";
 
 const MyButton = React.forwardRef(({ onClick, href }, ref) => {
   return (
@@ -18,7 +25,41 @@ const MyButton = React.forwardRef(({ onClick, href }, ref) => {
 });
 
 function SurprisepackCard({ pack }) {
-  const { title, price, description, images, id } = pack;
+  const { title, price, images, id } = pack;
+  const [addedToCart, setAddedTOCart] = useState(false);
+  const state = useSelector((state) => state);
+  const alreadyInCart = state.cart.items.find((item) => item.id == id);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (alreadyInCart) {
+      setAddedTOCart(true);
+    }
+  }, []);
+
+  const handleCart = () => {
+    setAddedTOCart(!addedToCart);
+    if (addedToCart && !state.user.user) {
+      dispatch(setUpLocalStorage("REMOVE_FROM_LOCAL_CART", pack));
+      return dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", pack));
+    } else if (!addedToCart && !state.user.user) {
+      dispatch(setUpLocalStorage("ADD_TO_LOCAL_CART", pack));
+      return dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", pack));
+    }
+    if (addedToCart) {
+      dispatch(removeFromCart({ id }));
+    } else {
+      dispatch(
+        addToCart({
+          title,
+          price,
+          image: images[0].url,
+          id,
+          count: 0,
+          type: "surprise-packs",
+        })
+      );
+    }
+  };
   return (
     <article>
       <div
@@ -31,10 +72,12 @@ function SurprisepackCard({ pack }) {
       <div className="content">
         <div className="flex2">
           <h2>
-            <a> {title}</a>
+            <Link href={"/surprise-packs/" + id}>
+              <a> {title}</a>
+            </Link>
           </h2>
           <button className="viewBtn">
-            <Link href={"/packs/" + id}>
+            <Link href={"/surprise-packs/" + id}>
               <a>
                 <MyButton />
               </a>
@@ -46,12 +89,14 @@ function SurprisepackCard({ pack }) {
           <div>
             <p>₹ {price}</p>
           </div>
-          <div>
-            <Link href="/">
-              <a className="addToCart">
+          <div onClick={() => handleCart(addedToCart)}>
+            <a className="addToCart">
+              {addedToCart ? (
+                <MdRemoveShoppingCart />
+              ) : (
                 <RiShoppingCartLine className="arrow" />
-              </a>
-            </Link>
+              )}
+            </a>
           </div>
         </div>
       </div>

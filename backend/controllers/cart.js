@@ -4,7 +4,7 @@ import axios from "../helpers/axios";
 export const addItemToCart = async (req, res) => {
   try {
     const USER = req.user;
-    const { id, image, title, quantity } = req.body;
+    const { id, image, title } = req.body;
     const isAlreadyAvailable = USER.cart.find((items) => items.id == id);
     console.log(isAlreadyAvailable);
     if (isAlreadyAvailable) {

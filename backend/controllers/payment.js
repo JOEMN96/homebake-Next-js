@@ -40,7 +40,7 @@ export const checkoutSingleItem = async (req, res) => {
       ],
       mode: "payment",
       success_url: process.env.DOMAIN + "Sucess",
-      cancel_url: process.env.FAILURE_URL + `Cake/${id}`,
+      cancel_url: process.env.FAILURE_URL + itemType + "/" + id,
     });
 
     // ? Old Node Mailer Code
@@ -77,6 +77,8 @@ export const checkoutSingleItem = async (req, res) => {
     }
     res.status(200).send({ url: session.url });
   } catch (e) {
+    console.log(e);
+
     res.status(444).send();
   }
 
@@ -89,7 +91,6 @@ export const checkoutCart = async (req, res) => {
   if (!ids.length > 0) {
     return res.send(400).send({ msg: "There is no items in the cart" });
   }
-  const query = ids.map((id) => "_id=" + id + "&").join("");
 
   try {
     const paymentItems = req.user.cart.map((item) => {

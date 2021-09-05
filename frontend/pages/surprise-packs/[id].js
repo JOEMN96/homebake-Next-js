@@ -8,13 +8,29 @@ import styles from "../../styles/SingleCakePage.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Head from "next/head";
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
+import backeendAxios from "../../helpers/backendAxios";
+import router from "next/router";
 
 SwiperCore.use([Navigation, Thumbs]);
 
 function Packs({ cake }) {
-  const { title, price, description, images } = cake;
-
+  const { title, price, description, images, id } = cake;
+  const [buyNowError, setbuyNowError] = useState(null);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const handleBuynow = async () => {
+    try {
+      setbuyNowError("Loading ...");
+      const res = await backeendAxios.post("checkoutSingleItem", {
+        id,
+        itemType: "surprise-packs",
+      });
+      router.push(res.data.url);
+    } catch (error) {
+      setbuyNowError("Something Went Wrong");
+      console.log(error.message);
+    }
+  };
 
   return (
     <section>
@@ -50,7 +66,11 @@ function Packs({ cake }) {
               return (
                 <SwiperSlide key={image._id}>
                   {/* <Image layout="fill" src={`${image.url}`} alt={title} /> */}
-                  <img src={`${image.url}`} alt="" />
+                  <img
+                    className={styles.sliderImage}
+                    src={`${image.url}`}
+                    alt=""
+                  />
                 </SwiperSlide>
               );
             })}
@@ -84,7 +104,8 @@ function Packs({ cake }) {
           <h3>₹ {price}</h3>
 
           <p>{description}</p>
-          <button>Buy Now</button>
+          <button onClick={handleBuynow}>Buy Now</button>
+          <p>{buyNowError}</p>
         </Col>
       </Row>
     </section>
