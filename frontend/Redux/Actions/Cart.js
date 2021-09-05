@@ -4,9 +4,10 @@ export const addToCart = (item) => {
   return async (dispatch) => {
     try {
       const res = await axios.post("addItem", item);
+
       dispatch({
         type: "ADD_TO_CART",
-        payload: res.data,
+        payload: { items: res.data.items },
       });
     } catch (error) {
       dispatch({
@@ -17,9 +18,10 @@ export const addToCart = (item) => {
   };
 };
 
-export const removeFromCart = (item) => {
+export const removeFromCart = (item, removeAll) => {
   return async (dispatch) => {
-    const res = await axios.post("removeItem", { id: item.id });
+    const res = await axios.post("removeItem", { id: item.id, removeAll });
+
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: res.data,

@@ -77,7 +77,6 @@ export const checkoutSingleItem = async (req, res) => {
     }
     res.status(200).send({ url: session.url });
   } catch (e) {
-    console.log(e.message);
     res.status(444).send();
   }
 
@@ -93,27 +92,24 @@ export const checkoutCart = async (req, res) => {
   const query = ids.map((id) => "_id=" + id + "&").join("");
 
   try {
-    const { data } = await axios.get(`cakes/?${query}`);
-
-    const paymentIntend = data.map((item) => {
-      const currentItem = req.user.cart.find((item2) => item2.id == item._id);
+    const paymentItems = req.user.cart.map((item) => {
       return {
         price_data: {
           currency: "inr",
           product_data: {
             name: item.title,
-            images: [currentItem.image],
+            images: [item.image],
           },
           unit_amount: item.price * 100,
         },
         tax_rates: ["txr_1JUZrjKvrwBJvfpSkV6BpEYE"],
-        quantity: currentItem.quantity ? currentItem.quantity : 1,
+        quantity: item.quantity ? item.quantity : 1,
       };
     });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: paymentIntend,
+      line_items: paymentItems,
       shipping_rates: ["shr_1JUZhVKvrwBJvfpSi3ZgbH17"],
       shipping_address_collection: {
         allowed_countries: ["IN"],
@@ -125,7 +121,6 @@ export const checkoutCart = async (req, res) => {
 
     res.status(200).send({ url: session.url });
   } catch (error) {
-    console.log(error);
     res.status(404).send(error);
   }
 

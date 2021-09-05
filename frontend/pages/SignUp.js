@@ -22,10 +22,10 @@ function SignUp() {
   const [errors, setErrors] = useState([]);
   const [done, setDone] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onFinish = async (values) => {
     const val = { ...values };
-    const dispatch = useDispatch();
 
     setErrors([]);
     try {

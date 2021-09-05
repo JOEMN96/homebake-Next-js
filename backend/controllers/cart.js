@@ -1,23 +1,30 @@
 import User from "../models/user";
+import axios from "../helpers/axios";
 
 export const addItemToCart = async (req, res) => {
   try {
     const USER = req.user;
-    const { id, image, price, title, quantity } = req.body;
+    const { id, image, title, quantity } = req.body;
     const isAlreadyAvailable = USER.cart.find((items) => items.id == id);
+    console.log(isAlreadyAvailable);
     if (isAlreadyAvailable) {
       const query = {
         _id: USER._id,
         "cart.id": id,
       };
       const action = {
-        "cart.$.quantity": isAlreadyAvailable.quantity + 1,
+        "cart.$.quantity": isAlreadyAvailable.quantity
+          ? isAlreadyAvailable.quantity + 1
+          : 2,
       };
-      const doc = await User.findOneAndUpdate(query, action);
+      const doc = await User.findOneAndUpdate(query, action, { new: true });
+      await doc.save();
       if (!doc) return res.status(400).send({ msg: "Something went Wrong" });
       return res.status(200).send({ items: [...doc.cart] });
     } else {
-      USER.cart.push({ id, image, price, title, quantity });
+      const result = await axios.get(req.body.type + "/" + id);
+      const price = result.data.price;
+      USER.cart.push({ id, image, price, title, quantity: 1 });
       await USER.save();
       return res.status(201).send({ items: [...USER.cart] });
     }
@@ -30,7 +37,6 @@ export const removeItemFromCart = async (req, res) => {
   try {
     const { id, removeAll } = req.body;
     const user = req.user;
-    console.log(id);
     const removalItem = user.cart.find((item) => item.id == id);
     if (removeAll) {
       user.cart = user.cart.filter((item) => item.id !== removalItem.id);
@@ -46,7 +52,7 @@ export const removeItemFromCart = async (req, res) => {
     };
 
     if (removalItem.quantity > 1) {
-      const user = await User.findOneAndUpdate(query, action);
+      const user = await User.findOneAndUpdate(query, action, { new: true });
       await user.save();
       return res.status(200).send({ items: [...user.cart] });
     } else {
@@ -55,7 +61,6 @@ export const removeItemFromCart = async (req, res) => {
       return res.status(200).send({ items: [...user.cart] });
     }
   } catch (error) {
-    console.log(error.message);
     return res.status(404).send({ msg: "Something Went Wrong" });
   }
 };

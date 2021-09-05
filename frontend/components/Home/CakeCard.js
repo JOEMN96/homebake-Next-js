@@ -47,7 +47,16 @@ function CakeCard({ cake }) {
     if (addedToCart) {
       dispatch(removeFromCart({ id }));
     } else {
-      dispatch(addToCart({ title, price, image: images[0].url, id, count: 0 }));
+      dispatch(
+        addToCart({
+          title,
+          price,
+          image: images[0].url,
+          id,
+          count: 0,
+          type: "cakes",
+        })
+      );
     }
   };
 
