@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  console.log("incoming");
+  console.log(`incoming at ${req.path}`);
   next();
 });
 // ! Add .env Above
