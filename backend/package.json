@@ -23,6 +23,8 @@
     "jsonwebtoken": "^7.4.3",
     "mongoose": "^5.13.4",
     "nodemailer": "^6.6.3",
+    "passport": "^0.4.1",
+    "passport-google-oauth2": "^0.2.0",
     "stripe": "^8.171.0",
     "validator": "^13.6.0"
   },

@@ -16,7 +16,7 @@ export const checkoutSingleItem = async (req, res) => {
       return res.status(400).send();
     }
     const { data } = await axios.get(`${itemType}/${id}`);
-    console.log(itemType);
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       shipping_rates: ["shr_1JUZhVKvrwBJvfpSi3ZgbH17"],

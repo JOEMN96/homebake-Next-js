@@ -46,6 +46,12 @@ function SignIn() {
     }
   };
 
+  const hangleGoogleAuth = async () => {
+    const res = await axios.get("/google");
+
+    console.log(res);
+  };
+
   return (
     <section className={styles.signUp}>
       <div className="titleWrapper">
@@ -110,7 +116,7 @@ function SignIn() {
             htmlType="submit"
             elms={{ name: "Log In", status: button }}
           />
-          <Button style={{ margin: "0 10px" }}>
+          <Button onClick={hangleGoogleAuth} style={{ margin: "0 10px" }}>
             <GoogleOutlined /> Log In With Google
           </Button>
         </div>
