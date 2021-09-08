@@ -1,28 +1,24 @@
-// import dotenv from "dotenv";
-// dotenv.config();
+import dotenv from "dotenv";
+import sgMail from "@sendgrid/mail";
+dotenv.config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
-export const webhook = (request, response) => {
+export const webhook = async (request, response) => {
   const event = request.body;
-  console.log("fired");
-  // Handle the event
   switch (event.type) {
-    case "payment_intent.succeeded":
-      const paymentIntent = event.data.object;
-      console.log("PaymentIntent was successful!");
-      console.log(paymentIntent);
-      break;
-    case "payment_intent.created":
-      const paymentMethod = event.data.object;
-      console.log("PaymentMethod was created!");
-      break;
     case "charge.succeeded":
       const data = event.data.object;
       console.log(data);
-      console.log("chage was sucess!");
+      console.log("Charge was sucess!");
+
+      const msg = {
+        to: process.env.EMAIL_ID,
+        from: "aruljoe37@gmail.com",
+        subject: `New Order from - ${data.billing_details.address.name}`,
+        text: `Hey New Order ${data.billing_details.address.name}, Please Check the Stripe Ac`,
+      };
+      await sgMail.send(msg);
       break;
-    // ... handle other event types
     default:
       console.log(`Unhandled event type ${event.type}`);
   }

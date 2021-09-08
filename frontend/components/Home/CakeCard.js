@@ -72,12 +72,12 @@ function CakeCard({ cake }) {
       <div className="content">
         <div className="flex2">
           <h2>
-            <Link href={"/Cake/" + id}>
+            <Link href={"/Cakes/" + id}>
               <a> {title}</a>
             </Link>
           </h2>
           <button className="viewBtn">
-            <Link href={"/Cake/" + id}>
+            <Link href={"/Cakes/" + id}>
               <a>
                 <MyButton />
               </a>

@@ -49,6 +49,8 @@ const signIn = async (req, res) => {
   }
 };
 
+const googleAuth = async (req, res) => {};
+
 const userProfile = async (req, res) => {
   res.status(200).send(req.user);
 };
@@ -63,4 +65,4 @@ const logout = async (req, res) => {
   res.status(307).redirect("/");
 };
 
-export { signUp, signIn, userProfile, logout };
+export { signUp, signIn, userProfile, logout, googleAuth };
