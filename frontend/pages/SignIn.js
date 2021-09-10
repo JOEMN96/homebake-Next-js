@@ -47,9 +47,13 @@ function SignIn() {
   };
 
   const hangleGoogleAuth = async () => {
-    const res = await axios.get("/google");
-
-    console.log(res);
+    try {
+      // const res = await axios.get("/google");
+      // console.log("res", res);
+      window.open("http://localhost:2000/google");
+    } catch (error) {
+      console.log("err", error);
+    }
   };
 
   return (

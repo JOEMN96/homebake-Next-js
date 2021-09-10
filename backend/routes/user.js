@@ -18,6 +18,15 @@ router.get(
   "/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
 );
+router.get(
+  "/oauthCb",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  function (req, res) {
+    console.log(req);
+    res.redirect("/profile");
+  }
+);
+
 router.get("/profile", auth, userProfile);
 router.get("/logout", auth, logout);
 

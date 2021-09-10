@@ -9,6 +9,6 @@ const instance = axios.create({
   crossDomain: true,
 });
 
-instance.defaults.withCredentials = true;
+// instance.defaults.withCredentials = true;
 
 export default instance;
