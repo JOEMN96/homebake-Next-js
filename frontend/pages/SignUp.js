@@ -51,6 +51,16 @@ function SignUp() {
     }
   };
 
+  const hangleGoogleAuth = async () => {
+    try {
+      window.location.href = process.env.NEXT_PUBLIC_BACKEND_URL + "google";
+    } catch (error) {
+      router.push("/error");
+    }
+  };
+
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
+
   return (
     <section className={styles.signUp}>
       <div className="titleWrapper">
@@ -149,7 +159,7 @@ function SignUp() {
             htmlType="submit"
             elms={{ name: "Sign Up", status: button }}
           />
-          <Button style={{ margin: "0 10px" }}>
+          <Button onClick={hangleGoogleAuth} style={{ margin: "0 10px" }}>
             <GoogleOutlined /> Sign Up With Google
           </Button>
         </div>

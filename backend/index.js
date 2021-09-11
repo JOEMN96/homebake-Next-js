@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
+import Passport from "passport";
 
 import userRouter from "./routes/user";
 import cartRouter from "./routes/cart";
@@ -49,6 +50,7 @@ app.use(function (req, res, next) {
 app.get("/", (req, res) => {
   res.status(200).send("Webserver is Working");
 });
+app.use(Passport.initialize());
 
 app.use(userRouter);
 app.use(cartRouter);

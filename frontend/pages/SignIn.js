@@ -48,11 +48,9 @@ function SignIn() {
 
   const hangleGoogleAuth = async () => {
     try {
-      // const res = await axios.get("/google");
-      // console.log("res", res);
-      window.open("http://localhost:2000/google");
+      window.location.href = process.env.NEXT_PUBLIC_BACKEND_URL + "google";
     } catch (error) {
-      console.log("err", error);
+      router.push("/error");
     }
   };
 

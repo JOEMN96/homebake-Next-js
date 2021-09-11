@@ -49,7 +49,18 @@ const signIn = async (req, res) => {
   }
 };
 
-const googleAuth = async (req, res) => {};
+const googleAuth = async (req, res) => {
+  const token = await req.user.generateJWT();
+  console.log("fires");
+  res.cookie("jwt", token, {
+    httpOnly: true,
+    sameSite: false,
+    signed: true,
+    secure: false,
+    maxAge: 2 * 60 * 60 * 1000,
+  });
+  res.status(200).redirect(process.env.DOMAIN + "/Profile");
+};
 
 const userProfile = async (req, res) => {
   res.status(200).send(req.user);
