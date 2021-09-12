@@ -1,7 +1,9 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 import isEmail from "validator/lib/isEmail.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+const { Schema } = mongoose;
 
 const USER = new Schema(
   {
