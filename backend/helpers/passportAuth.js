@@ -1,6 +1,6 @@
 import passport from "passport";
 import dotenv from "dotenv";
-var GoogleStrategy = require("passport-google-oauth2").Strategy;
+import GoogleStrategy from "passport-google-oauth2";
 import USER from "../models/user.js";
 
 dotenv.config();
