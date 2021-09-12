@@ -2,7 +2,6 @@ let initaialState = {
   items: [],
 };
 const reducer = (state = initaialState, action) => {
-  console.log(action);
   switch (action.type) {
     case "ADD_TO_CART":
       return state.items.length > 0

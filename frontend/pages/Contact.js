@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 
 function Contact() {
   const user = useSelector((state) => state);
-  console.log(user);
   return (
     <>
       <section className="contactPageHeader"></section>

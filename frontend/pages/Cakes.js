@@ -75,7 +75,6 @@ function Cakes() {
   };
 
   const handleSub = () => {
-    console.log("fired");
     let element_to_scroll_to = document.querySelector(".scrol");
     element_to_scroll_to.scrollIntoView();
   };

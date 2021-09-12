@@ -50,7 +50,6 @@ export const getServerSideProps = async (ctx) => {
     });
     return { props: { data: res.data } };
   } catch (error) {
-    console.log(error);
     ctx.res.writeHeader(307, { Location: "/" });
     ctx.res.end();
     return { props: { data: null } };
