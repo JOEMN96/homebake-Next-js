@@ -2,17 +2,18 @@
 
 - Frontend - Next.js, Redux, React-query, Ant-d, Scss 
 - CMS - Strapi, mongoDB
-- Backend - Node.js, Express, MongoDB, Stripe
+- Backend - Node.js, Express, MongoDB, Stripe, Passport.js
 
 ## Details
 
 - Password are Encrypted and salted.
 - Cloudinary is used to host images for CMS.
-- Front end and CMS are hosted in heroku
+- Backend end and CMS are hosted in heroku
+- Frontend is hosted on Netlify 
 
-## required Env
+## Required Env
 
-#### backend
+#### Backend
 
 - STRIPE_SECRET_KEY 
 - DOMAIN ="http://localhost:3000/"
@@ -20,6 +21,13 @@
 - EMAIL_ID 
 - PW 
 - SENDGRID_API_KEY
+- SUPER_SEC_PW_FOR_GOOGLE
+- GOOGLE_CLIENT_SECRET
+- GOOGLE_CLIENT_ID
+
+#### Frontend
+
+- NEXT_PUBLIC_BACKEND_URL
 
 #### CMS
 
