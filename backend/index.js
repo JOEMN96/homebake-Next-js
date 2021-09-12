@@ -5,9 +5,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import Passport from "passport";
 
-import userRouter from "./routes/user";
-import cartRouter from "./routes/cart";
-import paymentRoutes from "./routes/payment";
+import userRouter from "./routes/user.js";
+import cartRouter from "./routes/cart.js";
+import paymentRoutes from "./routes/payment.js";
 dotenv.config();
 
 const app = express();

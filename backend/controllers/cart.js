@@ -1,5 +1,5 @@
-import User from "../models/user";
-import axios from "../helpers/axios";
+import User from "../models/user.js";
+import axios from "../helpers/axios.js";
 
 export const addItemToCart = async (req, res) => {
   try {

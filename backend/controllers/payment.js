@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import axios from "../helpers/axios";
+import axios from "../helpers/axios.js";
 import dotenv from "dotenv";
 import sgMail from "@sendgrid/mail";
 // import nodemailer from "nodemailer";

@@ -1,20 +1,21 @@
 import { Router } from "express";
+import passport from "passport";
+
 import {
   validateSignUp,
   validateSignIn,
   isValid,
-} from "../middlewares/validators";
+} from "../middlewares/validators.js";
 import {
   signUp,
   signIn,
   userProfile,
   logout,
   googleAuth,
-} from "../controllers/user";
-import passport from "passport";
-import "../helpers/passportAuth";
+} from "../controllers/user.js";
+import "../helpers/passportAuth.js";
 
-import { auth } from "../middlewares/auth";
+import { auth } from "../middlewares/auth.js";
 
 const router = Router();
 

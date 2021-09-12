@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { auth } from "../middlewares/auth";
-import { checkoutSingleItem, checkoutCart } from "../controllers/payment";
-import { webhook } from "../controllers/webhooks";
+import { auth } from "../middlewares/auth.js";
+import { checkoutSingleItem, checkoutCart } from "../controllers/payment.js";
+import { webhook } from "../controllers/webhooks.js";
 
 const router = Router();
 
