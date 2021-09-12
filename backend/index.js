@@ -12,7 +12,7 @@ dotenv.config();
 
 const app = express();
 mongoose.connect(
-  "mongodb://localhost:27017/homebake",
+  `mongodb+srv://joe:${process.env.DB_PW}@cluster0.tz3q8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -29,7 +29,7 @@ mongoose.connect(
 );
 
 app.use(express.json());
-app.use(cookieParser("ASECRETSTRING"));
+app.use(cookieParser(process.env.COOKIE_PARSER));
 app.use(cors({ origin: true, optionsSuccessStatus: 200, credentials: true }));
 app.use(function (req, res, next) {
   res.header(

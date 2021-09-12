@@ -71,7 +71,7 @@ USER.statics.Authenticate = async function (email, password) {
 };
 
 USER.methods.generateJWT = async function () {
-  const token = jwt.sign({ _id: this._id }, "SECRETHERE", {
+  const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
     expiresIn: "1 day",
   });
   this.tokens.push(token);
