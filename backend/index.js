@@ -60,6 +60,6 @@ app.use((req, res) => {
   res.status(404).send();
 });
 
-app.listen(2000, () => {
+app.listen(process.env.PORT || 2000, () => {
   console.log("server is Running");
 });
