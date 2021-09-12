@@ -51,7 +51,6 @@ const signIn = async (req, res) => {
 
 const googleAuth = async (req, res) => {
   const token = await req.user.generateJWT();
-  console.log("fires");
   res.cookie("jwt", token, {
     httpOnly: true,
     sameSite: false,

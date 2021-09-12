@@ -14,7 +14,7 @@ import { useState } from "react";
 import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { loadCart } from "../Redux/Actions/Cart";
+import { loadCart, setUpLocalStorage } from "../Redux/Actions/Cart";
 import { isUserLoggedIn } from "../Redux/Actions/User";
 
 function SignIn() {
@@ -35,6 +35,8 @@ function SignIn() {
         setDone(true);
         dispatch(loadCart());
         dispatch(isUserLoggedIn());
+        dispatch(setUpLocalStorage("STOP_LOADING_LOCAL_STORAGE", null));
+        dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", []));
         router.push("/Profile");
       }
     } catch (error) {
@@ -47,6 +49,9 @@ function SignIn() {
   };
 
   const hangleGoogleAuth = async () => {
+    dispatch(setUpLocalStorage("STOP_LOADING_LOCAL_STORAGE", null));
+    dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", []));
+
     try {
       window.location.href = process.env.NEXT_PUBLIC_BACKEND_URL + "google";
     } catch (error) {

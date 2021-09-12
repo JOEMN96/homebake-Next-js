@@ -9,12 +9,13 @@ import {
 } from "../Redux/Actions/Cart";
 import backendAxios from "../helpers/backendAxios";
 import { useState } from "react";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 function Cart() {
   const state = useSelector((state) => state);
   const [buyNowError, setbuyNowError] = useState(null);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleRemoveFromCart = (item, removeAll) => {
     if (state.user.user) {
@@ -34,13 +35,15 @@ function Cart() {
   };
 
   const handleCheckout = async () => {
+    if (!state.user.user) {
+      return router.push("/SignIn");
+    }
     try {
       setbuyNowError("Loading ...");
       const res = await backendAxios.post("checkoutCart", {});
       router.push(res.data.url);
     } catch (error) {
       setbuyNowError("Something Went Wrong");
-      console.log(error.message);
     }
   };
 
@@ -67,15 +70,20 @@ function Cart() {
             <div key={index} className={styles.item}>
               <img src={item.image || item.images[0].url} alt={item.title} />
               <h3 className={styles.title}>{item.title}</h3>
-              <div className={styles.countArea}>
-                <AiOutlinePlus onClick={() => handleQuantity(item)} />
-                <span className={styles.itemNos}>
-                  {item.quantity ? item.quantity : 0}
-                </span>
-                <AiOutlineMinus
-                  onClick={() => handleRemoveFromCart(item, true)}
-                />
-              </div>
+              {state.user.user ? (
+                <div className={styles.countArea}>
+                  <AiOutlinePlus onClick={() => handleQuantity(item)} />
+                  <span className={styles.itemNos}>
+                    {item.quantity ? item.quantity : 0}
+                  </span>
+                  <AiOutlineMinus
+                    onClick={() => handleRemoveFromCart(item, true)}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
+
               <p className={styles.price}>
                 <span>₹ </span>
                 {item.price}

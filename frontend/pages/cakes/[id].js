@@ -11,6 +11,7 @@ import Head from "next/head";
 import { Radio } from "antd";
 import SwiperCore, { Navigation, Thumbs } from "swiper/core";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Thumbs]);
@@ -30,8 +31,7 @@ function Cake({ cake }) {
     shape,
     id,
   } = cake;
-
-  const token = process.env.STRIPE_PUBLISH_KEY;
+  const { user } = useSelector((state) => state.user);
 
   const handleChecked = (e) => {
     console.log("radio checked", e.target.value);
@@ -41,6 +41,9 @@ function Cake({ cake }) {
   };
 
   const handleBuynow = async () => {
+    if (!user) {
+      return router.push("/SignIn");
+    }
     try {
       setbuyNowError("Loading ...");
       const res = await backeendAxios.post("checkoutSingleItem", {
@@ -50,7 +53,6 @@ function Cake({ cake }) {
       router.push(res.data.url);
     } catch (error) {
       setbuyNowError("Something Went Wrong");
-      console.log(error.message);
     }
   };
 

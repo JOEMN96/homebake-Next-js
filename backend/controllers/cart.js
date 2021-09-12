@@ -6,7 +6,6 @@ export const addItemToCart = async (req, res) => {
     const USER = req.user;
     const { id, image, title } = req.body;
     const isAlreadyAvailable = USER.cart.find((items) => items.id == id);
-    console.log(isAlreadyAvailable);
     if (isAlreadyAvailable) {
       const query = {
         _id: USER._id,

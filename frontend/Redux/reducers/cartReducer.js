@@ -2,6 +2,7 @@ let initaialState = {
   items: [],
 };
 const reducer = (state = initaialState, action) => {
+  console.log(action);
   switch (action.type) {
     case "ADD_TO_CART":
       return state.items.length > 0
@@ -83,14 +84,3 @@ const reducer = (state = initaialState, action) => {
 };
 
 export default reducer;
-
-// case "GET_FORM_LOCAL_STORAGE":
-//   const newState = JSON.parse(localStorage.getItem("cart"));
-//   return newState
-//     ? {
-//         ...state,
-//         items: [...newState],
-//       }
-//     : {
-//         ...state,
-//       };

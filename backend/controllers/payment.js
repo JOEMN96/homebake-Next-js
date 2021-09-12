@@ -77,8 +77,6 @@ export const checkoutSingleItem = async (req, res) => {
     }
     res.status(200).send({ url: session.url });
   } catch (e) {
-    console.log(e);
-
     res.status(444).send();
   }
 
@@ -86,12 +84,6 @@ export const checkoutSingleItem = async (req, res) => {
 };
 
 export const checkoutCart = async (req, res) => {
-  const ids = req.user.cart.map((item) => item.id);
-
-  if (!ids.length > 0) {
-    return res.send(400).send({ msg: "There is no items in the cart" });
-  }
-
   try {
     const paymentItems = req.user.cart.map((item) => {
       return {

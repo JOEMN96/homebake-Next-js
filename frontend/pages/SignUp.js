@@ -15,7 +15,7 @@ import { useState } from "react";
 import axios from "../helpers/backendAxios";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { loadCart } from "../Redux/Actions/Cart";
+import { loadCart, setUpLocalStorage } from "../Redux/Actions/Cart";
 
 function SignUp() {
   const [button, setButton] = useState(false);
@@ -35,9 +35,10 @@ function SignUp() {
         setButton(false);
         setDone(true);
         dispatch(loadCart());
+        dispatch(setUpLocalStorage("STOP_LOADING_LOCAL_STORAGE", null));
+        dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", []));
         router.push("/Profile");
       }
-      console.log(res);
     } catch (error) {
       if (error.response?.status == 400) {
         setDone(false);
@@ -52,14 +53,14 @@ function SignUp() {
   };
 
   const hangleGoogleAuth = async () => {
+    dispatch(setUpLocalStorage("STOP_LOADING_LOCAL_STORAGE", null));
+    dispatch(setUpLocalStorage("SAVE_TO_LOCAL_STORAGE", []));
     try {
       window.location.href = process.env.NEXT_PUBLIC_BACKEND_URL + "google";
     } catch (error) {
       router.push("/error");
     }
   };
-
-  console.log(process.env.NEXT_PUBLIC_BACKEND_URL);
 
   return (
     <section className={styles.signUp}>

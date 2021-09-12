@@ -11,7 +11,6 @@ const fetchDesserts = async () => {
 
 function Deserts() {
   const { data, status } = useQuery(["desserts"], fetchDesserts);
-  console.log(data);
   if (status == "loading") {
     return <Spin wrapperClassName="loader" size="large" />;
   }

@@ -8,9 +8,6 @@ export const webhook = async (request, response) => {
   switch (event.type) {
     case "charge.succeeded":
       const data = event.data.object;
-      console.log(data);
-      console.log("Charge was sucess!");
-
       const msg = {
         to: process.env.EMAIL_ID,
         from: "aruljoe37@gmail.com",

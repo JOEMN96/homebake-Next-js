@@ -28,7 +28,6 @@ function Packs({ cake }) {
       router.push(res.data.url);
     } catch (error) {
       setbuyNowError("Something Went Wrong");
-      console.log(error.message);
     }
   };
 
