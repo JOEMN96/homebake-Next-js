@@ -1,7 +1,7 @@
 import styles from "../styles/Cart.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import { GrClose } from "react-icons/Gr";
+import { IoMdClose } from "react-icons/Io";
 import {
   removeFromCart,
   setUpLocalStorage,
@@ -88,7 +88,7 @@ function Cart() {
                 <span>₹ </span>
                 {item.price}
               </p>
-              <GrClose onClick={() => handleRemoveFromCart(item, false)} />
+              <IoMdClose onClick={() => handleRemoveFromCart(item, false)} />
             </div>
           );
         })}
