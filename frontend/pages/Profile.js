@@ -60,7 +60,7 @@ export const getServerSideProps = async (ctx) => {
     });
     return { props: { data: res.data } };
   } catch (error) {
-    ctx.res.writeHeader(307, { Location: "/SignIn" });
+    ctx.res.writeHead(302, { Location: "/SignIn" });
     ctx.res.end();
     return { props: { data: null } };
   }
